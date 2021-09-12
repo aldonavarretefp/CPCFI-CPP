@@ -5,7 +5,6 @@ int main(){
     string str;
     int counter = 0,maximo = 1 ;
     char letra='A';
-
     cin>>str;
     for(char c: str){
         if(c==letra){
