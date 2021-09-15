@@ -1,1 +1,3 @@
-cout<<str<<endl;
+< strlen(str); i++) 
+        // {
+        // }
