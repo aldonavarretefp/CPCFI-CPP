@@ -89,7 +89,6 @@ int main()
 {
     freopen("input.txt","r",stdin);
     int T; 
-    scanf("%i",&T);
     FO(tc,T)
         solve();
     return 0;
