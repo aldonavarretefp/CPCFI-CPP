@@ -17,12 +17,10 @@
 #include <limits>
 #include <time.h>
 #include <math.h>
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <cstdio>
 
 using namespace std;
 
@@ -150,37 +148,29 @@ template <typename T> inline T readInt()
 
 /********** Main()  function **********/
 int main()
-{   
-    // freopen("input.txt", "r", stdin);
-    int nCasos,nDay,p,h[100],N,diaActual,day,hartales;
-    bool banderaHartal;
-    scanf("%d",&nCasos);
-    while (nCasos--)
-    {
-        scanf("%d",&N);
-        scanf("%d",&p);
-        for(int i = 0; i < p; i++) 
-            scanf("%d", &h[i]);
-        day = 0;
-        hartales = 0;
-        while(day < N) {
-            diaActual = (day+1) % 7;//Ni viernes ni sabado, es decir dia 06 y 0 en modulo,pq jamas me dan multiplos de 7
-            if(diaActual != 0 && diaActual != 6) {
-                banderaHartal = false;
-                for(int i = 0; i < p; i++) {
-                    if((day + 1) % h[i] == 0) {
-                        banderaHartal = true;
-                    }
-                }
-                if(banderaHartal) hartales++;
-            }
-            day++;
-        }
-        printf("%d\n", hartales);
-    
+{
 
+    freopen("input.txt","r",stdin);
+
+    int i,j, puedesMover = 0,impar=1,nABuscar;
+    SCD(nABuscar);
+    if(nABuscar==1)printf("En el centro\n");
+    printf("nABuscar = %d\n",nABuscar);
+    int64 iterador=1;
+    while(nABuscar>iterador){
+        printf("Puntero = %d\n",iterador);
+        printf("puedesMover = %d\n",puedesMover);
+        impar+=2;
+        puedesMover+=2;
+        iterador=impar*impar;
 
     }
+    FOR(i,0,puedesMover,1){
+        FOR(j,0,puedesMover,1)
+            
+    }
     
+
+
     return 0;
 }
