@@ -73,97 +73,62 @@ typedef unsigned long int uint32;
 typedef long long int int64;
 typedef unsigned long long int  uint64;
 
-/******* Debugging Class Template *******/
-#define DEBUG
-
-#ifdef DEBUG
-
-    #define debug(args...)     (Debugger()) , args
-
-    class Debugger
-    {
-        public:
-        Debugger(const std::string& _separator = " - ") :
-        first(true), separator(_separator){}
-
-        template<typename ObjectType> Debugger& operator , (const ObjectType& v)
-        {
-            if(!first)
-                std:cerr << separator;
-            std::cerr << v;
-            first = false;
-            return *this;
-        }
-        ~Debugger() {  std:cerr << endl;}
-
-        private:
-        bool first;
-        std::string separator;
-    };
-
-#else
-    #define debug(args...)                  // Just strip off all debug tokens
-#endif
 
 /**************************************/
 /******** User-defined Function *******/
 /**************************************/
+void solve(deque<int> &deq){
+    char operacion[12];
+    int n;
 
-void solve(int S,int B){
-    int a,b,L,R,soldiers[S];
-    for (int i=0; i<S;i++)
-        soldiers[i] = i+1;
-    int soldiersSize = *(&soldiers + 1) - soldiers;
-    FO(i,B){
-        SCD(a); SCD(b);
-        a--;
-        b--;
-        int pL = a-1;
-        int pR = b+1;
-        for(int i=a; i<=b;i++)
-            soldiers[i] = 0;
-
-        while(soldiers[pL]==0 && pL >= 0 ){ 
-            pL--;
+    scanf("%s %d",&operacion,&n);
+    //Comparando operacion
+    if(!strcmp("push_back",operacion)){
+        deq.push_back(n); 
+    }else if(!strcmp("push_front",operacion)){
+        deq.push_front(n);
+    }else if(!strcmp("get",operacion)){
+        if(n==0){
+            std::cout << ' ' << deq.front()<<endl;
+            
+        }else if(n==deq.size()-1){
+            std::cout << ' ' << deq.back()<<endl;
+        }else{
+            std::cout << ' ' << deq[n]<<endl;
         }
-        while(soldiers[pR]==0 && pR <= soldiersSize-1 ){ 
-            pR++;
-        }
-
-        if(pL<0) printf("* ");
-        else{
-            L = soldiers[pL];
-            printf("%d ",L);
-        }
-
-        if(pR>soldiersSize-1) printf("*\n");
-        else{
-            R = soldiers[pR];
-            printf("%d\n",R);
-        }
-        
-        
-    }    printf("-\n");
+    }else{
+        std::deque<int>::iterator it = deq.begin();
+        // printf("%f",ceil((float)deq.size()/2));
+        int indiceMiddle = (int)ceil((float) deq.size()/2 );
+        // printf("Debe ponerse en : %d\n",indiceMiddle);
+        it +=(int)ceil((float) deq.size()/2 );
+        it = deq.insert (it,n); 
+    }
+    // printf("deqSize: %d\n",deq.size());  
+    // for(int n : deq)
+    //     std::cout << n << '\n';  
 }
 
-void setIO(){
-  string file = __FILE__;
-  file = string(file.begin(),file.end()-3);
-  string input_file = file + "in";
-  string output_file = file + "out";
-  freopen(input_file.c_str(), "r",stdin);
-  freopen(output_file.c_str(),"w",stdout);
+// void setIO(){
+//   string file = __FILE__;
+//   file = string(file.begin(),file.end()-3);
+//   string input_file = file + "in";
+//   string output_file = file + "out";
+//   freopen(input_file.c_str(), "r",stdin);
+//   freopen(output_file.c_str(),"w",stdout);
   
-}
+// }
 
 /********** Main()  function **********/
 int main()
 {
     // if(getenv("CP_IO")){setIO();}
-    int S,B; 
-    while(scanf("%d %d",&S,&B), S!=0){
-        solve(S,B);
-    }
-    
+    // freopen("teque.in", "r", stdin);
+    // freopen("teque.out", "w", stdout);
+    int T; 
+    deque<int> deq;
+    SCD(T);
+    FO(tc,T)
+        solve(deq);
     return 0;
 }

@@ -73,77 +73,17 @@ typedef unsigned long int uint32;
 typedef long long int int64;
 typedef unsigned long long int  uint64;
 
-/******* Debugging Class Template *******/
-#define DEBUG
-
-#ifdef DEBUG
-
-    #define debug(args...)     (Debugger()) , args
-
-    class Debugger
-    {
-        public:
-        Debugger(const std::string& _separator = " - ") :
-        first(true), separator(_separator){}
-
-        template<typename ObjectType> Debugger& operator , (const ObjectType& v)
-        {
-            if(!first)
-                std:cerr << separator;
-            std::cerr << v;
-            first = false;
-            return *this;
-        }
-        ~Debugger() {  std:cerr << endl;}
-
-        private:
-        bool first;
-        std::string separator;
-    };
-
-#else
-    #define debug(args...)                  // Just strip off all debug tokens
-#endif
 
 /**************************************/
 /******** User-defined Function *******/
 /**************************************/
-
-void solve(int S,int B){
-    int a,b,L,R,soldiers[S];
-    for (int i=0; i<S;i++)
-        soldiers[i] = i+1;
-    int soldiersSize = *(&soldiers + 1) - soldiers;
-    FO(i,B){
-        SCD(a); SCD(b);
-        a--;
-        b--;
-        int pL = a-1;
-        int pR = b+1;
-        for(int i=a; i<=b;i++)
-            soldiers[i] = 0;
-
-        while(soldiers[pL]==0 && pL >= 0 ){ 
-            pL--;
-        }
-        while(soldiers[pR]==0 && pR <= soldiersSize-1 ){ 
-            pR++;
-        }
-
-        if(pL<0) printf("* ");
-        else{
-            L = soldiers[pL];
-            printf("%d ",L);
-        }
-
-        if(pR>soldiersSize-1) printf("*\n");
-        else{
-            R = soldiers[pR];
-            printf("%d\n",R);
-        }
-        
-        
-    }    printf("-\n");
+void llenaMapa(map<int,PII,greater<int>> &mymap){
+    int level, x,y;
+    SCD(level);
+    SCD(x);
+    SCD(y);
+    // Inserting the elements
+    mymap.insert(make_pair(level,make_pair(x,y)));   
 }
 
 void setIO(){
@@ -159,11 +99,27 @@ void setIO(){
 /********** Main()  function **********/
 int main()
 {
-    // if(getenv("CP_IO")){setIO();}
-    int S,B; 
-    while(scanf("%d %d",&S,&B), S!=0){
-        solve(S,B);
+    freopen("platforme.in","r",stdin);
+    int T; SCD(T);
+    map<int,PII,std::greater<int>> m;
+    vector<int y, vector<int,int> ,std:greater<int> > v;
+    FO(tc,T)
+        llenaMapa(m);
+    vector<int y, vector<int,int> ,std:greater<int> >
+    map<int, PII> :: iterator it; 
+    for (it=m.begin() ; it!=m.end() ; it++) 
+        cout << "(" << (*it).first << "=> "<< (*it).second.first << " "<< (*it).second.second << ")" << endl; 
+    FO(i,2){
+        for (it=m.begin() ; it!=m.end() ; it++){
+            map<int, PII> :: iterator secondIterator = it; secondIterator++;//Me muevo al siguiente
+            int x = it->second.first;
+            int y = it->second.second;
+            int x2 = secondIterator->second.first;
+            int y2 = secondIterator->second.second;
+            if(<x)
+            printf("%d %d %d %d\n",x,y,x2,y2);
+
+        }           
     }
-    
     return 0;
 }
