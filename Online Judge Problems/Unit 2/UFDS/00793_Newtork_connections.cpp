@@ -97,68 +97,85 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #else
 #define debug(x...)
 #endif
-/**************************************/
-/******** User-defined Function *******/
-/**************************************/
 
-VI primeFactors;
-int sumPrimeFactors = 0;
+class UnionFind {                                              // OOP style
+private:
+  VI p, rank, setSize;                       // remember: vi is vector<int>
+  int numSets;
+public:
+  UnionFind(int N) {
+    setSize.assign(N, 1); 
+    numSets = N; 
+    rank.assign(N, 0);
+    p.assign(N, 0); 
+      for (int i = 0; i < N; i++) 
+        p[i] = i; 
+  }
 
-int digitsSum(int32 n){
-    int sum=0,m;   
-    while(n>0){    
-    m=n%10;    
-    sum+=m;    
-    n/=10;
-    }    
-    return sum;
-}    
-int count(int n) {
-    char s[12];
-    sprintf(s, "%d", n);
-    int i, sum = 0;
-    for(i = 0; s[i]; i++)
-        sum += s[i]-'0';
-    return sum;
-}
-void addToList(int number, int nTimes){
-    FO(i,nTimes){
-        primeFactors.PB(number);
-    }
-}
-void primeFactorization(int32 n){
-    sumPrimeFactors = 0;
-    int counter;
-    for (int i =2 ; i <= sqrt(n) ; i++){
-        
-        if(n%i == 0) {
-            counter = 0;
-            while(n%i == 0){
-                n/=i;
-                counter++;
-            }
-            addToList(i, counter);
-            // countItsDigits(i,counter);
-            sumPrimeFactors+= counter*digitsSum(i);
+  int findSet(int i) {
+    return (p[i] == i)/*Soy mi propio padre?*/ ? i : (p[i] = findSet(p[i])); 
+  }
 
-        }
-    }
-    if(n!=1){ addToList(n, 1); sumPrimeFactors+= digitsSum(n);} 
-}
+  bool isSameSet(int i, int j) {
+    return findSet(i) == findSet(j); 
+  }
+  void unionSet(int i, int j) { 
+    if (!isSameSet(i, j)) { 
+      numSets--; 
+      int x = findSet(i);
+      int y = findSet(j);
+    // rank is used to keep the tree short
+      if (rank[x] > rank[y]) { 
+          p[y] = x; 
+          setSize[x] += setSize[y]; 
+      }
+      else{ 
+        p[x] = y; 
+        setSize[y] += setSize[x];
+        if (rank[x] == rank[y]) 
+          rank[y]++; 
+      } 
+    } 
+  }
+  int numDisjointSets() {
+    return numSets; 
+  }
+
+  int sizeOfSet(int i) {
+    return setSize[findSet(i)]; 
+  }
+
+};
 void solve(){
-    int32 n;
-    SCLD(n);
-    for(int i=n+1; ; i++){
-        primeFactors = {};
-        primeFactorization(i);
-        int digitSum = digitsSum(i);
-        // cout<< "N: "<< n<<endl;
-        // debug(i);
-        // cout<< "Digits Sum: "<< digitSum<<endl;
-        // cout<< "Factors Sum: "<< sumPrimeFactors<<endl;
-        // debug(primeFactors);
-        if(digitSum == sumPrimeFactors && i!=primeFactors[0]){ PD(i);printf("\n"); break;}
-    }
+    int n,n1,n2;
+    char operation;
+    
+    SCD(n);
+    int c1 = 0,c2 = 0;
+    UnionFind UF(n);
+    
+    do{
+        debug(c1); debug(c2);
+        while(SCC(operation),operation!='\n'){
+            // debug (operation);
+            SCD(n1); 
+            SCD(n2);
+            debug(n1);
+            debug(n2);
+            if(operation == 'c'){ // connect
+                // PS("connection\n");
+                UF.unionSet(n1, n2);
+            } else{ //query
+                // PS("query\n");
+                if(UF.isSameSet(n1, n2)){
+                    c1++; 
+                }else{
+                    c2++;
+                }
+            } 
+        } 
+    }while(SCC(operation),operation!='\n');
+    printf("%d %d\n",c1,c2);
 }
 
 void setIO(){
@@ -180,6 +197,5 @@ int main()
     SCD(T);
     FO(tc,T)
         solve();
-    // printf("\n");
     return 0;
 }
