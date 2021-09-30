@@ -113,7 +113,7 @@ public:
   }
 
   int findSet(int i) {
-    return (p[i] == i)/*Soy mi propio padre?*/ ? i : (p[i] = findSet(p[i])); 
+    return (p[i] == i)? i : (p[i] = findSet(p[i])); 
   }
 
   bool isSameSet(int i, int j) {
@@ -148,35 +148,32 @@ public:
 };
 void solve(){
     int n,n1,n2;
-    char operation;
-    
-    SCD(n);
+    char operation,saltoLinea;
     int c1 = 0,c2 = 0;
-    UnionFind UF(n);
+    SCD(n);
+    SCC(saltoLinea);
+    UnionFind UF(n+1);
+    // printf("%d\n", UF.numDisjointSets()); // 5
+    // debug(c1); debug(c2);
+    while(SCC(operation) !=EOF ){
+      if(operation== '\n') {printf("%d,%d\n\n",c1,c2);return;}
+      SCD(n1); 
+      SCD(n2);
+      SCC(saltoLinea);
+      // debug (operation);
+      // debug(n1);\n
+      // debug(n2);
+      if(operation == 'c')UF.unionSet(n1, n2);
+      else //query
+        if(UF.isSameSet(n1, n2))c1++; 
+        else c2++;
+    } 
     
-    do{
-        debug(c1); debug(c2);
-        while(SCC(operation),operation!='\n'){
-            // debug (operation);
-            SCD(n1); 
-            SCD(n2);
-            debug(n1);
-            debug(n2);
-            if(operation == 'c'){ // connect
-                // PS("connection\n");
-                UF.unionSet(n1, n2);
-            } else{ //query
-                // PS("query\n");
-                if(UF.isSameSet(n1, n2)){
-                    c1++; 
-                }else{
-                    c2++;
-                }
-            } 
-        } 
-    }while(SCC(operation),operation!='\n');
-    printf("%d %d\n",c1,c2);
+    printf("%d,%d\n",c1,c2);
+
+    return;
 }
+
 
 void setIO(){
   string file = __FILE__;
@@ -184,7 +181,7 @@ void setIO(){
   string input_file = file + "in";
   string output_file = file + "out";
   freopen(input_file.c_str(), "r",stdin);
-//   freopen(output_file.c_str(),"w",stdout);
+  freopen(output_file.c_str(),"w",stdout);
   
 }
 
