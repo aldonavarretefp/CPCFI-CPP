@@ -107,23 +107,30 @@ template<typename T> void print_queue(T& q) {
 }
  
 void solve(){
-    string registro;
-    int k;
+    int k,q,p;
     PII par;
-    priority_queue< PII,vector<PII>, greater<PII> >pq;
-    int q, p;
+    priority_queue<pair<int, PII>, vector<pair<int, PII>>, greater<pair<int, PII>>> pq;
     string m;
-    cin<<m;
+    cin>>m;
+    // Primero agregamos todas y ya después podemos
+    // volverlas a agregar con su periodo alterado.
+    
+    // Aqui llenamos 
     while(strcmp(m.c_str(),"#")!=0){
         SCD(q); SCD(p);
-        pq.push(make_pair(q,p));
+        pq.push(make_pair(p,make_pair(q,p)));
+        cin>>m;
     }
+
+    //Aqui imprimos k veces
     SCD(k);
     while(k--){
-        PII p = pq.front();pq.pop();
-        cout<< p << endl;
-        pq.push(make_pair(p));
-        cout<< "result: "<<endl;
+        pair<int,PII> p = pq.top();
+        // debug(p);
+        pq.pop();
+        cout<< p.second.first << endl;
+        p.first += p.second.second;
+        pq.push(p);
     }
 }
 
@@ -142,6 +149,6 @@ int main()
 {
     
     if(getenv("CP_IO")){setIO();}
-    while(true){solve();}
+    solve();
     return 0;
 }

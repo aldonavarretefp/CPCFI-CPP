@@ -4,6 +4,10 @@
         "xstddef": "cpp",
         "queue": "cpp",
         "xstring": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "vector": "cpp",
+        "iostream": "cpp"
     }
 }
