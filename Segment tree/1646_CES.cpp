@@ -98,35 +98,56 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #else
 #define debug(x...)
 #endif
-VI A;
-void build(int n){
-    // for (size_t i = 0; i < count; i++)
-    // {
-    //     /* code */
 
-    // }
-    // for (size_t i = 0; i < count; i++)
-    // {
-    //     /* code */
-    // }
-    
-    
-}
-void solve(){
-    int n, q;
-    SCD(n); SCD(q);
-    FO(i,n){int num; SCD(num); A.PB(num);}
-    
-    // 1 - n es potencia de dos
-    // != 1 - n no es potencia de dos
-    while(__builtin_popcount(n)!=1){
-        A.PB(0); n++;
+vector<long long> A;
+vector<long long> ST;
+
+void build(int n) { // O(n)
+    for(int i = n; i < 2*n; i++) {
+        ST[i] = A[i-n];
     }
-    debug(A);
-    
-
+    for (int i = n-1; i >= 1; i--) {
+        ST[i] = ST[2*i] +  ST[2*i+1];
+    }
 }
 
+long long T(int node, int i, int j, int L, int R) {
+    if (L > j || R < i) return 0; //RMaxQ
+    if (L >= i && R <= j) return ST[node];
+    int M = (L+R)/2;
+    return T(node*2, i, j, L, M) +  T(node*2+1, i, j, M+1, R);
+}
+
+void solve() {
+    long long n, q;
+    cin >> n >> q;
+    FO(i, n) {
+        long long e; cin >> e;
+        A.push_back(e);
+    }
+
+    // si popcount(n) == 1: n es una potencia de dos
+    // si popcount(n) != 1: n NO una potencia de dos
+    while(__builtin_popcount(n) != 1) {
+        A.push_back(0);
+        n++;
+    }
+
+    FO(i, 2*n) ST.push_back(0);
+    build(n);
+
+    int L = 0; 
+    int R = n-1;
+
+    FO(k, q) {
+        long long i, j;
+        cin >> i >> j;
+        i--;
+        j--;
+        cout << T(1, i, j, L, R) << endl;
+    }
+    
+}
 void setIO(){
   string file = __FILE__;
   file = string(file.begin(),file.end()-3);
@@ -137,11 +158,12 @@ void setIO(){
   
 }
 
-/********** Main()  function **********/
-int main()
-{
-    
-    if(getenv("CP_IO")){setIO();}
-    solve();
+int main() {
+    if (getenv("CP_IO")) { setIO(); }
+    int T=1;
+    FO(tc, T){
+        solve();
+    }
     return 0;
 }
+
