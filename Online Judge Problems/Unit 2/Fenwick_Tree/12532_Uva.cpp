@@ -202,7 +202,7 @@ void setIO(){
 /********** Main()  function **********/
 int main()
 {
-    setIO();
+    // setIO();
     // if(getenv("CP_IO")){cout<< "YEs"<<endl;setIO();}
     // else printf("NO\n");
 
