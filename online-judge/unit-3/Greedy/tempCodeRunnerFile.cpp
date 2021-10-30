@@ -1,2 +1,1 @@
-int T;
-SETI conjuntoDer,conjuntoIzq;
+end-begin
