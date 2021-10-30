@@ -1,0 +1,1 @@
+int hcdown = 0;
