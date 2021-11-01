@@ -98,43 +98,18 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #else
 #define debug(x...)
 #endif
+
+
 int T;
-double func(double x)
-{
-    return x*x*x - x*x + 2;
+
+double NPV(const vector<double> CF, double IRR){
+    double npv = CF[0];
+    for (int i = 1; i <= T; ++i)
+        npv += CF[i] / pow(1.0 + IRR, i);
+    
+    return npv;
 }
-void bisection(double a, double b)
-{
-    if (func(a) * func(b) >= 0)
-    {
-        cout << "You have not assumed right a and b\n";
-        return;
-    }
- 
-    double c = a;
-    while ((b-a) >= EPSILON)
-    {
-        // Find middle point
-        c = (a+b)/2;
- 
-        // Check if middle point is root
-        if (func(c) == 0.0)
-            break;
- 
-        // Decide the side to repeat the steps
-        else if (func(c)*func(a) < 0)
-            b = c;
-        else
-            a = c;
-    }
-    cout << "The value of root is : " << c;
-}
-void solve(){
-    vector<float> CF[T+1];
-    FO(i,T){
-        SCD(i,T)
-    }
-}
+
 
 void setIO(){
   string file = __FILE__;
@@ -146,13 +121,36 @@ void setIO(){
   
 }
 
-/********** Main()  function **********/
-int main()
-{
-    
+int main() {
     if(getenv("CP_IO")){setIO();}
-    SCD(T);
-    FO(tc,T+1)
-        solve();
+    int n, i, j;
+    double CF[20];
+    while(scanf("%d", &n) == 1 && n) {
+        
+        for(i = 0; i <= n; i++)
+            scanf("%lf", &CF[i]);
+
+        double  l = -1,    // Minimo valor de IRR
+                r = 10000, //Maximo valor de IRR
+                mid;
+
+        int counter = 0;
+
+        while(l <= r && counter < 50) {
+            mid = (l+r)/2;
+            counter++;
+            double NPV = 0;
+            
+            for(i = 0; i <= n; i++)
+                NPV += CF[i]/pow(1+mid, i);
+            
+            if(NPV > 0) 
+                l = mid;
+            else
+                r = mid;
+        }
+
+        printf("%.2lf\n", mid);
+    }
     return 0;
 }
