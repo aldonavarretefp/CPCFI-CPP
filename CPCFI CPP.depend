@@ -1,8 +1,0 @@
-# depslib dependency file v1.0
-1630985405 source:c:\users\aaldi\onedrive\escritorio\cpcfi cpp\palyndrome.cpp
-	<iostream>
-	<stdlib.h>
-
-1630985444 source:c:\users\aaldi\onedrive\escritorio\cpcfi cpp\palindrome.cpp
-	<bits/stdc++.h>
-
