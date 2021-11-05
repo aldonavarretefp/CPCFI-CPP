@@ -104,12 +104,15 @@ void solve(){
     int number; SCD(number);
     int x; SCD(x);
     VI coins(number);
-    for (int i = 0; i < number; i++) {
-        SCD(coins[i]);
-    }
+    
+    for (int i = 0; i < number; i++) SCD(coins[i]);
+
+
     debug(coins);
     vector<int64> combinations(x+1,0);
-    combinations[0] = 1;
+
+    combinations[0] = 1; //caso base
+
     for (int i = 1; i <= x; i++) {
         for (int j = 0; j < number; j++) {
             if(i-coins[j] >= 0){
