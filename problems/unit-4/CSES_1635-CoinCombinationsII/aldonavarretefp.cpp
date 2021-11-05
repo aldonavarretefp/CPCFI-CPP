@@ -99,28 +99,22 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 
-const int64 modulo = 1000000007;
+
+
 void solve(){
-    int coinsNumber; SCD(coinsNumber);
+    // Dynamic Programming
+    // How many ways to sum up to x;
+    int n; SCD(n);
     int x; SCD(x);
-    VI coins(coinsNumber);
+    int coins[n];
+    VI combinations(x+1,0); combinations[0] = 1;
+    FO(i,n) scanf("%d",&coins[i]);
+    for (int j = 0; j < n ; j ++)
+        for(int z = 1; z <= x; z++)// Cambia el orden de los for
+            if(z - coins[j] >= 0)
+                combinations[z] = (combinations[z] +  combinations[z - coins[j]]) % MOD;
     
-    for (int i = 0; i < coinsNumber; i++) SCD(coins[i]);
-
-
-    debug(coins);
-    vector<int64> combinations(x+1,0);
-
-    combinations[0] = 1; //caso base
-
-    for (int i = 1; i <= x; i++) {
-        for (int j = 0; j < coinsNumber; j++) {
-            if(i-coins[j] >= 0){
-                combinations[i] = (combinations[i] + combinations[i-coins[j]] ) %  modulo;
-            }
-        }
-    }
-    debug(combinations);debug(x);
+    debug(combinations);
     cout<<combinations[x]<<endl;
 }
 

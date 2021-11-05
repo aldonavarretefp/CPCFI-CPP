@@ -101,11 +101,11 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 
 const int64 modulo = 1000000007;
 void solve(){
-    int number; SCD(number);
+    int coinsNumber; SCD(coinsNumber);
     int x; SCD(x);
-    VI coins(number);
+    VI coins(coinsNumber);
     
-    for (int i = 0; i < number; i++) SCD(coins[i]);
+    for (int i = 0; i < coinsNumber; i++) SCD(coins[i]);
 
 
     debug(coins);
@@ -114,7 +114,7 @@ void solve(){
     combinations[0] = 1; //caso base
 
     for (int i = 1; i <= x; i++) {
-        for (int j = 0; j < number; j++) {
+        for (int j = 0; j < coinsNumber; j++) {
             if(i-coins[j] >= 0){
                 combinations[i] = (combinations[i] + combinations[i-coins[j]] ) %  modulo;
             }
@@ -122,10 +122,6 @@ void solve(){
     }
     debug(combinations);debug(x);
     cout<<combinations[x]<<endl;
-
-    
-
-
 }
 
 void setIO(){
