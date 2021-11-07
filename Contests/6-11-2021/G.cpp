@@ -98,24 +98,32 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #else
 #define debug(x...)
 #endif
-
-
+int indexOf(std::string& text, std::string& pattern)
+{
+    std::string::size_type loc = text.find(pattern, 0);
+    if(loc != std::string::npos) 
+    {
+        return loc;
+    } 
+    else 
+    {
+        return -1;
+    }
+}
 
 void solve(){
-    // Dynamic Programming
-    // How many ways to sum up to target;
-    int n; SCD(n);
-    int target; SCD(target);
-    int coins[n];
-    VI combinations(target+1,0); combinations[0] = 1;
-    FO(i,n) scanf("%d",&coins[i]);
-    for (int j = 0; j < n ; j ++)
-        for(int z = 1; z <= target; z++)// Cambia el orden de los for para mantener ordenadas las monedas
-            if(z - coins[j] >= 0){
-                combinations[z] = (combinations[z] +  combinations[z - coins[j]]) % MOD;
-            }
-    debug(combinations);
-    cout<<combinations[target]<<endl;
+    string s;
+    getline(cin,s);
+    string pattern = "_";
+    int index = indexOf(s,pattern);
+    char vocalAnterior = s[index-1];
+    char vocalPosterior = s[index+1];
+    debug(vocalAnterior);
+    debug(vocalPosterior);
+    
+    debug(index);
+
+    
 }
 
 void setIO(){

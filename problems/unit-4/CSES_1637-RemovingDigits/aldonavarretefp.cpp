@@ -103,13 +103,10 @@ void solve(){
     scanf("%d",&n);
     VI minimum(n+1,INF);
     minimum[0]=0;
-    debug(minimum);
     for (int i=1;i<=n;i++){
         int tempValue = i;
         while(tempValue>0){
-            cout<<"i\t|\ttempValue\t|\t Minimum[i]| \n";
             minimum[i] = min(minimum[i],minimum[i-(tempValue%10)]+1);
-            printf("%d\t|\t%d\t|\t %d | \n",i,tempValue,minimum[i]);
             tempValue /= 10;
         }
     }

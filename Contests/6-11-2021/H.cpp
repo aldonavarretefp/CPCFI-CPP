@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -98,24 +99,66 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #else
 #define debug(x...)
 #endif
-
-
+struct punto{
+    int x,y;
+    punto(){}
+    punto(int _x,int _y){
+        x=_x;
+        y=_y;
+    }
+};
+bool comp(punto& p1 , punto& p2){
+    if(p1.x==p2.x){
+        return p1.y<p2.y;
+    }
+    return p1.x<p2.x;
+}
 
 void solve(){
-    // Dynamic Programming
-    // How many ways to sum up to target;
-    int n; SCD(n);
-    int target; SCD(target);
-    int coins[n];
-    VI combinations(target+1,0); combinations[0] = 1;
-    FO(i,n) scanf("%d",&coins[i]);
-    for (int j = 0; j < n ; j ++)
-        for(int z = 1; z <= target; z++)// Cambia el orden de los for para mantener ordenadas las monedas
-            if(z - coins[j] >= 0){
-                combinations[z] = (combinations[z] +  combinations[z - coins[j]]) % MOD;
-            }
-    debug(combinations);
-    cout<<combinations[target]<<endl;
+    //shortest path from source to destination and back
+    //Size of the grid
+    int n,m;
+    scanf("%d %d",&n,&m);
+    punto posicionInicial;
+    scanf("%d %d",&posicionInicial.x,&posicionInicial.y);
+    punto posicionInicialCopy=posicionInicial;
+    //Source and destination
+    int nPuntos; SCD(nPuntos);
+    vector<punto> puntos(nPuntos);
+    FO(i,nPuntos){
+        int x,y;
+        SCD(x); SCD(y);
+        punto p = punto(x,y);
+        puntos[i] = p;
+    }
+    sort(puntos.begin(),puntos.end(),comp);
+    vector<punto>::iterator it;
+    //For each point, find the shortest path cost
+    int distance = 0;
+    for (it = puntos.begin(); it != puntos.end(); ++it){
+        int horizontal = abs(posicionInicialCopy.x - it->x);
+        int vertical = abs(posicionInicialCopy.y - it->y);
+        distance += horizontal + vertical;
+        posicionInicialCopy = *it;
+    }
+    //13
+
+    //distance between positionInicialCopy and posicionInicial
+    int horizontal = abs(posicionInicialCopy.x - posicionInicial.x); debug(horizontal);
+    int vertical = abs(posicionInicialCopy.y - posicionInicial.y); debug(vertical);
+    distance += horizontal + vertical;
+    printf("%d\n",distance);
+    
+
+
+
+    // //Print puntos
+    // for (it = puntos.begin(); it != puntos.end(); ++it){
+    //     printf("%d %d\n",it->x,it->y);
+    // }
+
+    
+    
 }
 
 void setIO(){
@@ -133,6 +176,9 @@ int main()
 {
     
     if(getenv("CP_IO")){setIO();}
-    solve();
+    int T;
+    SCD(T);
+    FO(tc,T)
+        solve();
     return 0;
 }

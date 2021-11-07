@@ -98,24 +98,34 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #else
 #define debug(x...)
 #endif
+int rec(int n, int m) {
 
+	if (m == 0) 
+        return 0; // Gana Ollie
+	if (n < m) 
+        swap(n, m); 
+    
+    int sig = (n / m) * m; // 15 24 
+    int nuevoN = n - sig;
+    if (nuevoN == 0) 
+        return 1; // Gana Stan
 
+	if(nuevoN < n - m) return 1; // 
+    
+    //Recursividad
+    if (rec(nuevoN, m)) //Gana Ollie
+        return 0;
+	return 1;
+}
 
 void solve(){
-    // Dynamic Programming
-    // How many ways to sum up to target;
-    int n; SCD(n);
-    int target; SCD(target);
-    int coins[n];
-    VI combinations(target+1,0); combinations[0] = 1;
-    FO(i,n) scanf("%d",&coins[i]);
-    for (int j = 0; j < n ; j ++)
-        for(int z = 1; z <= target; z++)// Cambia el orden de los for para mantener ordenadas las monedas
-            if(z - coins[j] >= 0){
-                combinations[z] = (combinations[z] +  combinations[z - coins[j]]) % MOD;
-            }
-    debug(combinations);
-    cout<<combinations[target]<<endl;
+    int n, m;
+	while (scanf("%d %d", &n, &m) , n!=0 ) {
+		if (rec(n, m)) 
+            printf("Stan wins\n");
+		else 
+            printf("Ollie wins\n");
+	}
 }
 
 void setIO(){
@@ -133,6 +143,7 @@ int main()
 {
     
     if(getenv("CP_IO")){setIO();}
+    
     solve();
     return 0;
 }
