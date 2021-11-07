@@ -1,1 +1,1 @@
-![Mimizing coins]("./Minimizing Coins.png")
+![Mimizing coins](./min-coins.png)
