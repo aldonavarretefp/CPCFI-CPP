@@ -1,0 +1,1 @@
+![Mimizing coins](./MinimizingCoins.png)

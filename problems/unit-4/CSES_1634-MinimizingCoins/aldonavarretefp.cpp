@@ -100,29 +100,44 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 
+int best(int target,VI& coins,map<int,int>& memo ){
+    debug(memo); debug(target);
+    if(memo.count(target)) return memo[target];
+    if(target==0) return 1;
+    if(target<0) return 0;
+    int ans=0;
+    for(int i=0;i<coins.size();i++){
+        memo[target] =best(target-coins[i],coins,memo);
+    }
+    memo[target]=ans;
+    return ans;
+
+}
 
 void solve(){
-    int n,sum;
-    SCD(n); SCD(sum);
-    VI coins(n);
-    FO(i,n){
+    int nCoins,target;
+    SCD(nCoins); SCD(target);
+    VI coins(nCoins);
+    FO(i,nCoins){
         SCD(coins[i]);
     }
-    VI dp(sum+1,INF);
+    VI dp(target+1,INF);
     dp[0]=0;
-    FOR(i,1,sum+1,1){
-        FOR(j,0,n,1){
-            
+    FOR(i,1,target+1,1){
+        FO(j,nCoins){
             if(i-coins[j]>=0){
                 dp[i] =min( dp[i], dp[i-coins[j]]+1);
             }
         }
     }
-    if(dp[sum]==INF){
+    if(dp[target]==INF){
         cout<<-1<<endl;
     }else{ 
-        cout<<dp[sum]<<endl;
+        cout<<dp[target]<<endl;
     }
+    MPII memo;
+    int ans = best(target,coins,memo);
+    cout<<ans;
     
 }
 
