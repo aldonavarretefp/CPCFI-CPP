@@ -1,11 +1,26 @@
 #include <iostream>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <cmath>
-#include <algorithm>
+#include <string>
 #include <vector>
-
+#include <algorithm>
+#include <sstream>
+#include <queue>
+#include <deque>
+#include <bitset>
+#include <iterator>
+#include <list>
+#include <stack>
+#include <map>
+#include <set>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <limits>
+#include <time.h>
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
 
 using namespace std;
 
@@ -45,6 +60,15 @@ using namespace std;
 #define endl '\n'
 #define fastIO cin.tie(0); cout.tie(0);
 const double pi=acos(-1.0);
+typedef pair<int, int> PII;
+typedef vector<int> VI;
+typedef vector<string> VS;
+typedef vector<PII> VII;
+typedef vector<VI> VVI;
+typedef map<int,int> MPII;
+typedef set<int> SETI;
+typedef multiset<int> MSETI;
+typedef queue<int> QI;
 typedef long int int32;
 typedef unsigned long int uint32;
 typedef long long int int64;
@@ -74,6 +98,29 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #else
 #define debug(x...)
 #endif
+void solve(){
+    int nBooks, x;
+    cin >>nBooks>>x; 
+    vector<int> booksPages(nBooks);
+    vector<int> booksPrices(nBooks);
+    for(int i =0 ; i<nBooks; i++) cin >> booksPrices[i];
+    for(int i =0 ; i<nBooks; i++) cin >> booksPages[i];
+    vector< vector<int> > dp(nBooks+1, vector<int>(x+1,0)); 
+    for(int idxBook = 0; idxBook < nBooks; idxBook++){
+        for(int precio = 0; precio <= x; precio++){
+            debug(idxBook);
+            debug(precio);
+            dp[idxBook+1][precio] = dp[idxBook][precio]; // copio su valor al siguiente, para compararlo
+            if( precio >= booksPrices[idxBook]){
+                debug(booksPages[idxBook]);
+                debug(dp[idxBook][precio - booksPrices[idxBook]]);
+                dp[idxBook+1][precio] = max( dp[idxBook+1][precio], booksPages[idxBook] + dp[idxBook][precio - booksPrices[idxBook]] );
+            }   
+        }
+    }
+    debug(dp);
+    cout<<dp[nBooks][x]<<endl;
+}
 
 void setIO(){
   string file = __FILE__;
@@ -82,29 +129,15 @@ void setIO(){
   string output_file = file + "out";
   freopen(input_file.c_str(), "r",stdin);
   freopen(output_file.c_str(),"w",stdout);
+  
 }
 
 /********** Main()  function **********/
-int main(){
-    if(getenv("CP_IO")){setIO();}
-    int SZ; cin>>SZ;
-    vector<string> matrix(SZ);
-    for (int i = 0; i< SZ; i++){ cin >> matrix[i];}
+int main()
+{
     
-    vector< vector<int64> > dp(SZ,vector<int64>(SZ,0)); // {[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]}
-    dp[0][0] = (matrix[0][0] == '.' ? 1 : 0); 
-    for (int i = 0; i < SZ ; i ++){
-        for(int j = 0 ; j < SZ ; j++){
-            if(matrix[i][j] != '*'){
-                //verificar si no me he salido equisde
-                if (matrix[i-1][j] == '.' && i >= 1) // arriba
-                    dp[i][j] = (dp[i][j] + dp[i-1][j]) % MOD;
-                if(matrix[i][j-1] == '.' && j >= 1) //izquierda
-                    dp[i][j] = (dp[i][j] + dp[i][j-1]) % MOD;
-            }
-        }
-    }
-    debug(dp);
-    printf("%lld\n",dp[SZ-1][SZ-1]);
+    if(getenv("CP_IO")){setIO();}
+
+    solve();
     return 0;
 }
