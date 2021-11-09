@@ -1,5 +1,6 @@
 # Dynamic Programming
  Maximize, Minimize...
+ Observe if there is sub-structures.
 
  ## UVa 11450
  Algunas posibles soluciones vistas anteriormente
@@ -15,3 +16,4 @@
  Se inicializa la matriz bidimensional para cada uno de los estados y llenarlos con valores dummies. <br> 
 
  ### Bottom-Up DP
+ 
