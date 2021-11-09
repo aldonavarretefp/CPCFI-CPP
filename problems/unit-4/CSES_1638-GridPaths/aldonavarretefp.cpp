@@ -89,16 +89,19 @@ int main(){
     if(getenv("CP_IO")){setIO();}
     int SZ; cin>>SZ;
     vector<string> matrix(SZ);
-    for (int i = 0; i< SZ; i++){ cin >> matrix[i];}
+    for (int i = 0; i< SZ; i++){ cin >> matrix[i];} 
     
-    vector< vector<int64> > dp(SZ,vector<int64>(SZ,0)); // {[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]}
-    dp[0][0] = (matrix[0][0] == '.' ? 1 : 0); 
+    vector< vector<int64> > dp(SZ,vector<int64>(SZ,0)); // {[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]} Cada casilla representa cuantos caminos bifurcan de ahi 
+    
+    dp[0][0] = matrix[0][0] == '.' ? 1 : 0; 
+
     for (int i = 0; i < SZ ; i ++){
         for(int j = 0 ; j < SZ ; j++){
             if(matrix[i][j] != '*'){
                 //verificar si no me he salido equisde
-                if (matrix[i-1][j] == '.' && i >= 1) // arriba
+                if (matrix[i-1][j] == '.' && i >= 1) {// arriba
                     dp[i][j] = (dp[i][j] + dp[i-1][j]) % MOD;
+                }
                 if(matrix[i][j-1] == '.' && j >= 1) //izquierda
                     dp[i][j] = (dp[i][j] + dp[i][j-1]) % MOD;
             }

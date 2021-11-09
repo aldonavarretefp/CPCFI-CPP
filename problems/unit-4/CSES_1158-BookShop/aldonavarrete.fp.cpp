@@ -101,19 +101,20 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 void solve(){
     int nBooks, x;
     cin >>nBooks>>x; 
+
     vector<int> booksPages(nBooks);
     vector<int> booksPrices(nBooks);
+
     for(int i =0 ; i<nBooks; i++) cin >> booksPrices[i];
     for(int i =0 ; i<nBooks; i++) cin >> booksPages[i];
+
+
     vector< vector<int> > dp(nBooks+1, vector<int>(x+1,0)); 
+
     for(int idxBook = 0; idxBook < nBooks; idxBook++){
         for(int precio = 0; precio <= x; precio++){
-            debug(idxBook);
-            debug(precio);
-            dp[idxBook+1][precio] = dp[idxBook][precio]; // copio su valor al siguiente, para compararlo
+            dp[idxBook+1][precio] = dp[idxBook][precio]; // copio su valor al siguiente, para compararlo despues 
             if( precio >= booksPrices[idxBook]){
-                debug(booksPages[idxBook]);
-                debug(dp[idxBook][precio - booksPrices[idxBook]]);
                 dp[idxBook+1][precio] = max( dp[idxBook+1][precio], booksPages[idxBook] + dp[idxBook][precio - booksPrices[idxBook]] );
             }   
         }
