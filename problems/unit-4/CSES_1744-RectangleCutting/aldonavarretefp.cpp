@@ -121,14 +121,23 @@ void solve(){
                 debug(m,n);
                 // Se prueba con cortes verticales
                 for(int i = 1; i<=n; i++){
-                    int valor = dp[m][i] + dp[m][n-i] + 1;//Mi corte actual
+                    // Se mantiene la altura m
+                    int valor =  dp[m][i] 
+                               + dp[m][n-i] 
+                               + 1; // m=2,n=3, valor = dp[2][1] + dp[2][2] + 1
+                                    // m=2,n=3  valor = dp[2][2] + dp[2][1] + 1
                     dp[m][n] = min(dp[m][n],valor);
                     debug(dp[m][n]);
                 }
                 
                 // Se prueba con cortes horizontales
+               
                 for(int i = 1; i<=m; i++){
-                    int valor = dp[i][n] + dp[m-i][n] + 1; //Mi corte actual
+                    // Se mantiene el ancho n
+                    int valor =   dp[i][n] 
+                                + dp[m-i][n] 
+                                + 1; // m=2,n=3, valor = dp[1][3] + dp[1][3] + 1
+                    if(m==2 && n==3 && i ==2) cout<<"m="<<m<<",n="<<n<<", valor = dp[1][3] + dp[1][3] + 1"<<endl
                     dp[m][n] = min(dp[m][n],valor);
                     debug(dp[m][n]);
                 }
