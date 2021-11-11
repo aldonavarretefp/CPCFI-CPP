@@ -7,5 +7,4 @@ De igual manera nota que la matriz entonces tiene una diagonal con ceros y la tr
 
 ## MoneySums
 Dados un conjunto de números debemos obtener todas las posibles sumas de dichso numeros ordenados, es por eso que se utiliza un set.
-<br>
-<p align="center">![Exp](./CSES_1745-MoneySums/img.png)</p>
+<br><p align="center"> ![Exp](./CSES_1745-MoneySums/img.png) </p>
