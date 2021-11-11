@@ -120,7 +120,7 @@ void solve(){
             }else{
                 debug(m,n);
                 // Se prueba con cortes verticales
-                for(int i = 1; i<=n; i++){
+                for(int i = 1; i<n; i++){
                     // Se mantiene la altura m
                     int valor =  dp[m][i] 
                                + dp[m][n-i] 
@@ -132,7 +132,7 @@ void solve(){
                 
                 // Se prueba con cortes horizontales
                
-                for(int i = 1; i<=m; i++){
+                for(int i = 1; i<m; i++){
                     // Se mantiene el ancho n
                     int valor =   dp[i][n] 
                                 + dp[m-i][n] 
