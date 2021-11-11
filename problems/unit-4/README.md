@@ -6,5 +6,6 @@ De igual manera nota que la matriz entonces tiene una diagonal con ceros y la tr
 <br><p align="center">![Table](./CSES_1744-RectangleCutting/table.png)</p>
 
 ## MoneySums
-Dados un conjunto de números debemos obtener todas las posibles sumas de dichso numeros ordenados, es por eso que se utiliza un set.
+Dados un conjunto de números debemos obtener todas las posibles sumas de dichso numeros ordenados, es por eso que se utiliza un set.<br>
+Al final, los numeros que tengan un 1 son las sumas posibles que se pueden obtener usando las monedas. Notas: Se itera por cada moneda.
 <br><p align="center"> ![Exp](./CSES_1745-MoneySums/img.png) </p>
