@@ -12,8 +12,8 @@
     <li>Bottom-Up DP: Correct Answer</li>
  </ul>
 
- ### Top-Down DP
- Se inicializa la matriz bidimensional para cada uno de los estados y llenarlos con valores dummies. <br> 
+ ### Top-Bottom DP
+ Se inicializa la tabla con valores dummies(-1,±INF). <br> 
 
  ### Bottom-Up DP
- 
+ Se inicializa solo algunas casillas con el/los caso(s) base(s).
