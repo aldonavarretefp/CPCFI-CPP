@@ -17,3 +17,7 @@ De igual manera nota que la matriz entonces tiene una diagonal con ceros y la tr
 Dado un conjunto de números debemos obtener todas las posibles sumas de dichos numeros ordenados, es por eso que se utiliza un set.<br>
 Al final, los numeros que tengan un 1 son las sumas posibles que se pueden obtener usando las monedas. Notas: Se itera por cada moneda.
 <br><p align="center"> ![Exp](./CSES_1745-MoneySums/img.png) </p>
+
+## Book Shop (0/1 Snapsack problem)
+<p align="center"><img src="./CSES_1158-BookShop/IMG_4014.jpg"/></p>
+<p align="center"><img src="./CSES_1158-BookShop/IMG_4016.jpg"/></p>
