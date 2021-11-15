@@ -19,5 +19,5 @@ Al final, los numeros que tengan un 1 son las sumas posibles que se pueden obten
 <br><p align="center"> ![Exp](./CSES_1745-MoneySums/img.png) </p>
 
 ## Book Shop (0/1 Snapsack problem)
-<p align="center"><img src="./CSES_1158-BookShop/IMG_4014.jpg"/></p>
-<p align="center"><img src="./CSES_1158-BookShop/IMG_4016.jpg"/></p>
+<p align="center"> <img src="./CSES_1158-BookShop/IMG_4014.jpg"/> </p>
+<p align="center"> <img src="./CSES_1158-BookShop/IMG_4016.jpg"/> </p>
