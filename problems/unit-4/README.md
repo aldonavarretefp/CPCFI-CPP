@@ -18,6 +18,7 @@ Dado un conjunto de números debemos obtener todas las posibles sumas de dichos 
 Al final, los numeros que tengan un 1 son las sumas posibles que se pueden obtener usando las monedas. Notas: Se itera por cada moneda.
 <br><p align="center"> ![Exp](./CSES_1745-MoneySums/img.png) </p>
 
+<<<<<<< HEAD
 ## TwoSets II
 Dado un numero n , debemos calcular el # de maneras que se puede obtener ese numero
 dividiendo los numeros de 1 a n entre 2. Por ejemplo, para n = 4 conjunto1 = {2,3} conjunto2 = {4,1}. <br>
@@ -25,3 +26,8 @@ Ambos suman 5, pero ojo, puede ser que el conjunto salga al revés, por eso al f
 <br>
 Es un caso similar al de MONEYSUMS.<br>
 <p align ="center"> <img src = "CSES_1093-TwoSetsII/img.png"/> </p>
+=======
+## Book Shop (0/1 Snapsack problem)
+<p align="center"> <img src="./CSES_1158-BookShop/IMG_4014.JPG"/> </p>
+<p align="center"> <img src="./CSES_1158-BookShop/IMG_4016.JPG"/> </p>
+>>>>>>> 2a57f453ce97a69fed324dbf7a5aa9aa47132efe
