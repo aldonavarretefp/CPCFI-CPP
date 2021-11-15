@@ -17,3 +17,11 @@ De igual manera nota que la matriz entonces tiene una diagonal con ceros y la tr
 Dado un conjunto de números debemos obtener todas las posibles sumas de dichos numeros ordenados, es por eso que se utiliza un set.<br>
 Al final, los numeros que tengan un 1 son las sumas posibles que se pueden obtener usando las monedas. Notas: Se itera por cada moneda.
 <br><p align="center"> ![Exp](./CSES_1745-MoneySums/img.png) </p>
+
+## TwoSets II
+Dado un numero n , debemos calcular el # de maneras que se puede obtener ese numero
+dividiendo los numeros de 1 a n entre 2. Por ejemplo, para n = 4 conjunto1 = {2,3} conjunto2 = {4,1}. <br>
+Ambos suman 5, pero ojo, puede ser que el conjunto salga al revés, por eso al final la respuesta se <b> divide entre 2</b> PERO DE FORMA MODULO INVERSO.
+<br>
+Es un caso similar al de MONEYSUMS.<br>
+<p align ="center"> <img src = "CSES_1093-TwoSetsII/img.png"/> </p>

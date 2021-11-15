@@ -91,23 +91,25 @@ int main(){
     vector<string> matrix(SZ);
     for (int i = 0; i< SZ; i++){ cin >> matrix[i];} 
     
-    vector< vector<int64> > dp(SZ,vector<int64>(SZ,0)); // {[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]} Cada casilla representa cuantos caminos bifurcan de ahi 
+    vector< vector<int> > dp(SZ,vector<int>(SZ,0)); // {[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]} Cada casilla representa cuantos caminos bifurcan de ahi 
     
     dp[0][0] = matrix[0][0] == '.' ? 1 : 0; 
 
     for (int i = 0; i < SZ ; i ++){
         for(int j = 0 ; j < SZ ; j++){
-            if(matrix[i][j] != '*'){
-                //verificar si no me he salido equisde
-                if (matrix[i-1][j] == '.' && i >= 1) {// arriba
+            if(matrix[i][j] == '.'){
+                //verificar si no me he salido
+                if (matrix[i-1][j] == '.' && i -1 >= 0) {// arriba
                     dp[i][j] = (dp[i][j] + dp[i-1][j]) % MOD;
                 }
-                if(matrix[i][j-1] == '.' && j >= 1) //izquierda
+                if(matrix[i][j-1] == '.' && j - 1 >= 0) //izquierda
                     dp[i][j] = (dp[i][j] + dp[i][j-1]) % MOD;
             }
         }
     }
     debug(dp);
-    printf("%lld\n",dp[SZ-1][SZ-1]);
+
+
+    cout<<dp[SZ-1][SZ-1]<<endl;
     return 0;
 }

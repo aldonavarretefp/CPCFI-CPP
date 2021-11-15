@@ -137,7 +137,6 @@ void solve(){
                     int valor =   dp[i][n] 
                                 + dp[m-i][n] 
                                 + 1; // m=2,n=3, valor = dp[1][3] + dp[1][3] + 1
-                                    // m=2,n=3  valor = dp[2][3] + dp[0][3] + 1
                     dp[m][n] = min(dp[m][n],valor);
                     debug(dp[m][n]);
                 }
