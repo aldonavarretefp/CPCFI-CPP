@@ -109,7 +109,6 @@ void solve(){
         if(isalpha(c)){
             if(isupper(c)){
                 ans += (char)(((c-'A'+rotationFactor)%26)+ 'A');
-                
             }
             else{
                 ans += (char)(((c-'a'+rotationFactor)%26)+ 'a');
