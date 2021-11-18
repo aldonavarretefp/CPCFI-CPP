@@ -38,4 +38,4 @@ Debemos ordenar el conjunto de datos por fecha de terminación, para evitar coli
 en un futuro. <br>
 Complejidad: O(nlogn) Porque se busca para cada una de los items, y se hace una búsqueda
 binaria.
-<p align="center"> <img src="CSES_1745-MoneySums"/> </p> 
+<p align="center"> <img src="CSES_1745-MoneySums/img.png"/> </p> 
