@@ -34,10 +34,8 @@ Es un caso similar al de MONEYSUMS.<br>
 ## LIS (Longest Increasing Subsequence
 
 ## Projects
-
 Debemos ordenar el conjunto de datos por fecha de terminación, para evitar colisiones
 en un futuro. <br>
-
-Complejidad:O(nlogn) Porque se busca para cada una de los items, y se hace una buscqueda
+Complejidad: O(nlogn) Porque se busca para cada una de los items, y se hace una búsqueda
 binaria.
-
+<p align="center"> <img src="CSES_1745-MoneySums"/> </p> 
