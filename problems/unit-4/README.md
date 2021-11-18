@@ -30,3 +30,14 @@ Es un caso similar al de MONEYSUMS.<br>
 ## Book Shop (0/1 Snapsack problem)
 <p align="center"> <img src="./CSES_1158-BookShop/IMG_4014.JPG"/> </p>
 <p align="center"> <img src="./CSES_1158-BookShop/IMG_4016.JPG"/> </p>
+
+## LIS (Longest Increasing Subsequence
+
+## Projects
+
+Debemos ordenar el conjunto de datos por fecha de terminación, para evitar colisiones
+en un futuro. <br>
+
+Complejidad:O(nlogn) Porque se busca para cada una de los items, y se hace una buscqueda
+binaria.
+
