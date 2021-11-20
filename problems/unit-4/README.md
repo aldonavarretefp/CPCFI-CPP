@@ -35,7 +35,7 @@ Es un caso similar al de MONEYSUMS.<br>
 Este es un problema típico de entrevista en el que tienes que encontrar dado un arreglo 
 al subarray creciente más largo y dar su length.
 Para esto hay que ir iterando por cada uno de los elementos en un array pero
-ocupamos un array extra llamado LIS, que irá guardando valores, mediante <b>
+ocupamos un array extra llamado LIS, que irá guardando los valores de la LIS, mediante <b>
 lower_bound</b> busca donde debería de ir ese numero (Si no lo encontramos debemos solo agregarlo al final con un push_back debido a que entonces el current es el mayor),después  lo ponemos en el indice ( lower-LIS.begin() ). <br>
 Nota: Aquí no importa el orden de los numeros, solo la subsequencia.<br>
 <p align="center"><img src= CSES_1145-LongestIncreasingSubsequence/img.png /> </p>
