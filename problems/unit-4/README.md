@@ -42,7 +42,7 @@ Nota: Aquí no importa el orden de los numeros, solo la subsequencia.<br>
 
 ## Projects
 Debemos ordenar el conjunto de datos por fecha de terminación, para evitar colisiones
-en un futuro. <br>
+en un futuro. <br> Se ocupa un mapa para guardar <terminación, reward>. Se observa el current end de la tarea, y debo encontrar el projecto anteror que no colisione con mi current (<b>lower_bound en el map con el start de la current project</b>). Y voy igualando una variable llamada maxReward a lo que se ha echo de máximo.
 Complejidad: O(nlogn) Porque se busca para cada una de los items, y se hace una búsqueda
 binaria.
 <p align="center"> <img src="CSES_1140-Projects/img.png"/> </p> 
