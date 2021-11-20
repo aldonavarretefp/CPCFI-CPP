@@ -32,6 +32,14 @@ Es un caso similar al de MONEYSUMS.<br>
 <p align="center"> <img src="./CSES_1158-BookShop/IMG_4016.JPG"/> </p>
 
 ## LIS (Longest Increasing Subsequence
+Este es un problema típico de entrevista en el que tienes que encontrar dado un arreglo 
+al subarray creciente más largo y dar su length.
+Para esto hay que ir iterando por cada uno de los elementos en un array pero
+ocupamos un array extra llamado LIS, que irá guardando valores, mediante <b>
+lower_bound</b> busca donde debería de ir ese numero, restamos el iterador
+porque irá antes del que encontramos y lo ponemos. <br>
+Nota: Aquí no importa el orden de los numeros, solo la subsequencia.<br>
+<p align="center"><img src= CSES_1145-LongestIncreasingSubsequence/img.png /> </p>
 
 ## Projects
 Debemos ordenar el conjunto de datos por fecha de terminación, para evitar colisiones
