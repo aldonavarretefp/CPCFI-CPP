@@ -47,3 +47,17 @@ Complejidad: O(nˆ2 2^n) Como en el libro para instancias de 15 a 18.<br>
 Haciendo la siguiente operación:<br>
 x | (1<<i) Prender el bit a visited que corresponde a next. <br>
 
+# Problemas NO CLASICOS
+
+## UVa 10943 How do you add? (Range dp)
+Dado un entero n y k digitos dispoible, cuantas formas hay de sumar ese 
+número con K digitos.<br>
+En complejidad, se vuelve factorial, porque ocupa distribución binomial.<br>
+Estados.<br>
+Transiciones.<br>
+
+## Palos
+Tienes un palo de l longitud y debes calcular el costo mínimo para hacer los 
+cortes en las coordenadas o puntos especificados en un array. Este problema
+se resuelve de forma recursiva.
+
