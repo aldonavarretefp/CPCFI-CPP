@@ -107,12 +107,6 @@ struct Node {
         next = NULL;
     }
 };
-void insertAtBeggining(Node ** headPointer, int value){
-    Node* temp = new Node(value);
-    temp->next = *headPointer;
-    *headPointer = temp;
-}
-
 void printLinkedList (Node * headPointer){
     Node * temp = headPointer;
     cout<<"List :";
@@ -122,18 +116,108 @@ void printLinkedList (Node * headPointer){
     }
     cout<<endl;
 }
+void insertAtBeggining(Node ** headPointer, int value){
+    Node* temp = new Node(value);
+    temp->next = *headPointer;
+    *headPointer = temp;
+}
+void deleteAtIndex(Node ** headPointer, int index){
+    Node * curr = *headPointer;
+    if(index == 0){
+        *headPointer = curr->next;
+        free(curr);
+    }else{
+        int count = 0;
+        while(count < index-2){
+            curr = curr->next;
+            count++;
+        }
+        Node * next = curr->next;
+        curr->next = next->next;
+        free(next);
+    }
+}
+void insertAtIndex(Node ** headPointer, int index, int value){
+    Node* temp = new Node(value);
+    Node* curr = *headPointer;
+    if(index == 0){
+        temp->next = *headPointer;
+        *headPointer = temp;
+    }else{
+        int count = 0;
+        while(count < index - 1){
+            curr = curr->next;
+        }
+        temp->next = curr->next;
+        curr->next = temp;
+    }
+}
+void reverseLinkedList(Node ** headPointer ){
+    Node * curr = *headPointer;
+    Node * prev = NULL;
+    Node * next = NULL;
+    while(curr != NULL){
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    //Curr now is null
+    *headPointer = prev;
+}
+void reverseRecursive(Node ** headPointer, Node *p){
+    if(p->next == NULL){
+        *headPointer = p;
+        return;
+    }
+    reverseRecursive(headPointer,p->next);
+    Node* q = p->next; 
+    q->next = p;
+    p->next = NULL;
+}
+void printRecursive(Node* p){
+    if(p == NULL) return;
+    cout<<p->data<<" ";
+    printRecursive(p->next);
+}
+void printReverseRecursive(Node* p) 
+{ 
+    // Base case 
+    if (p == NULL) return; 
+    // print the list after head node 
+    printReverseRecursive(p->next); 
+    // After everything else is printed, print head 
+    cout << p->data << " "; 
+} 
+
+
 void solve(){
     Node* head = NULL;
-    int n;
-    cout<<"n: ";
-    cin>>n;
-    while(n--){
-        int num;
-        cout<<"Number: ";
-        cin>>num;
-        insertAtBeggining(&head, num);
-        printLinkedList(head);
+    int n=5;
+    FO(i,n){
+        insertAtBeggining(&head,i+1);
+
     }
+    printLinkedList(head);
+
+    reverseLinkedList(&head);
+    printLinkedList(head);
+    // deleteAtIndex(&head,0);
+    // deleteAtIndex(&head,20);
+    cout<<"Recursive: ";
+    printRecursive(head);
+    cout<<endl;
+    cout<<"Recursive Reversed(print): ";
+    printReverseRecursive(head);
+    cout<<endl;
+    cout<< "Reverse recursive: ";
+    reverseRecursive(&head,head);
+    printLinkedList(head);
+    
+    
+
+    
+    
 
 }
 
