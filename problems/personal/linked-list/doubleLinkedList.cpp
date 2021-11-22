@@ -99,124 +99,43 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 
-struct Node {
+struct Node{
     int data;
-    Node* next;
-    Node(int d) {
+    Node * next;
+    Node * prev;
+    Node(int d){
         data = d;
         next = NULL;
+        prev = NULL;
     }
 };
-void printLinkedList (Node * headPointer){
-    cout<<"List :";
-    while(headPointer != NULL){
-        cout<<headPointer->data<<" ";
-        headPointer = headPointer->next;
+void insertAtHead(Node ** head, int value){
+    Node * temp1 = new Node(value);
+    if(*head == NULL) {
+        *head = temp1;
+        return ;
+    }
+
+    temp1->next = *head;
+    (*head)->prev = temp1;
+    *head = temp1;
+}
+void print(Node * head){
+    while(head != NULL){
+        cout<< head->data<< " ";
+        head = head->next;
     }
     cout<<endl;
 }
-void insertAtBeggining(Node ** headPointer, int value){
-    Node* temp = new Node(value);
-    temp->next = *headPointer;
-    *headPointer = temp;
-}
-void deleteAtIndex(Node ** headPointer, int index){
-    Node * curr = *headPointer;
-    if(index == 0){
-        *headPointer = curr->next;
-        free(curr);
-    }else{
-        int count = 0;
-        while(count < index-2){
-            curr = curr->next;
-            count++;
-        }
-        Node * next = curr->next;
-        curr->next = next->next;
-        free(next);
-    }
-}
-void insertAtIndex(Node ** headPointer, int index, int value){
-    Node* temp = new Node(value);
-    Node* curr = *headPointer;
-    if(index == 0){
-        temp->next = *headPointer;
-        *headPointer = temp;
-    }else{
-        int count = 0;
-        while(count < index - 1){
-            curr = curr->next;
-        }
-        temp->next = curr->next;
-        curr->next = temp;
-    }
-}
-void reverseLinkedList(Node ** headPointer ){
-    Node * curr = *headPointer;
-    Node * prev = NULL;
-    Node * next = NULL;
-    while(curr != NULL){
-        next = curr->next;
-        curr->next = prev;
-        prev = curr;
-        curr = next;
-    }
-    //Curr now is null
-    *headPointer = prev;
-}
-void reverseRecursive(Node ** headPointer, Node *p){
-    if(p->next == NULL){
-        *headPointer = p;
-        return;
-    }
-    reverseRecursive(headPointer,p->next);
-    Node* q = p->next; 
-    q->next = p;
-    p->next = NULL;
-}
-void printRecursive(Node* p){
-    if(p == NULL) return;
-    cout<<p->data<<" ";
-    printRecursive(p->next);
-}
-void printReverseRecursive(Node* p) 
-{ 
-    // Base case 
-    if (p == NULL) return; 
-    // print the list after head node 
-    printReverseRecursive(p->next); 
-    // After everything else is printed, print head 
-    cout << p->data << " "; 
-} 
+
 
 
 void solve(){
-    Node* head = NULL;
-    int n=5;
-    FO(i,n){
-        insertAtBeggining(&head,i+1);
-
-    }
-    printLinkedList(head);
-
-    reverseLinkedList(&head);
-    printLinkedList(head);
-    // deleteAtIndex(&head,0);
-    // deleteAtIndex(&head,20);
-    cout<<"Recursive: ";
-    printRecursive(head);
-    cout<<endl;
-    cout<<"Recursive Reversed(print): ";
-    printReverseRecursive(head);
-    cout<<endl;
-    cout<< "Reverse recursive: ";
-    reverseRecursive(&head,head);
-    printLinkedList(head);
-    
-    
-
-    
-    
+    Node * head = NULL;
+    insertAtHead(&head,3);
+    insertAtHead(&head,2);
+    insertAtHead(&head,1);
+    print(head);
 
 }
 
@@ -234,7 +153,7 @@ void setIO(){
 int main()
 {
     
-    // if(getenv("CP_IO")){setIO();}
+
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
