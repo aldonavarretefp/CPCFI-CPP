@@ -98,47 +98,117 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #else
 #define debug(x...)
 #endif
-
+//Struct
 struct Node{
     int data;
-    Node * next;
-    Node * prev;
-    Node(int d){
-        data = d;
-        next = NULL;
-        prev = NULL;
+    Node * left;
+    Node * right;
+    Node(int v){ 
+        data = v; 
+        left = NULL;
+        right = NULL;
     }
 };
-void insertAtHead(Node ** head, int value){
-    Node * temp1 = new Node(value);
-    if(*head == NULL) {
-        *head = temp1;
-        return ;
-    }
-
-    temp1->next = *head;
-    (*head)->prev = temp1;
-    *head = temp1;
+//Functions
+struct Node * insert(Node * root,int value){
+    if (!root) return new Node(value);
+    if(value <= root->data ) root->left = insert(root->left, value);
+    else                     root->right = insert(root->right, value);
+    return root;
 }
-void prettyPrint(Node * head){
-    cout<<"List: ";
-    while(head != NULL){
-        if(head->next == NULL) cout<<head->data;
-        else cout<< head->data<< "->";
-        head = head->next;
-    }
-    cout<<endl;
+bool Search(Node * root,int k){
+    if(!root) return false;
+    if(root->data == k) return true;
+    if(k <= root->data) return Search(root->left,k);
+    else                return Search(root->right,k); 
+    
 }
 
+int findMin(Node * root){
+    Node * curr = root;
+    while(curr->left != NULL) curr = curr->left;
+    return curr->data;
 
+}
+int findMax(Node * root){
+    Node * curr = root;
+    while(curr->right != NULL) curr = curr->right;
+    return curr->data;
+
+}
+int findHeight(Node * root){
+    if(!root) return -1;
+    return 1 + max( findHeight(root->left), findHeight(root->right) );
+}
+
+//Traversals
+void InOrder(Node * root){
+    if(!root) return;
+    InOrder(root->left);
+    cout<<root->data<<" ";
+    InOrder(root->right);
+}
+void PreOrder(Node * root ){
+    if(!root) return;
+    cout<<root->data<<" ";
+    PreOrder(root->left);
+    PreOrder(root->right);
+
+}
+void PostOrder(Node * root ){
+    if (!root) return;
+    PostOrder(root->left);
+    PostOrder(root->right);
+    cout<<root->data<<" ";
+}
+void BFS(Node * root ){
+    if(!root) return;
+    queue<Node *> q; q.push(root);
+    while(!q.empty()){
+        Node * curr = q.front(); q.pop(); 
+        cout<<curr->data<<" ";
+        if(curr->left != NULL) q.push(curr->left);
+        if(curr->right != NULL) q.push(curr->right);
+    }
+}
+void DFS(Node * root ){
+    if(!root) return;
+    stack<Node *> s; s.push(root);
+    while(!s.empty()){
+        Node * curr = s.top(); s.pop();
+        cout<<curr->data<<" ";
+        if(curr->right != NULL) s.push(curr->right);
+        if(curr->left != NULL) s.push(curr->left);
+    }
+}
 
 void solve(){
-    Node * head = NULL;
-    insertAtHead(&head,3);
-    insertAtHead(&head,2);
-    insertAtHead(&head,1);
-    prettyPrint(head);
+    Node * root = NULL;
+    root = insert(root,9); // La primera vez se modifica la raiz.
+    insert(root,10);
+    insert(root,2);
+    insert(root,3);
+    insert(root,1);
+    insert(root,8);
 
+    cout<<"InOrder: ";  InOrder(root);  cout<<endl;
+    cout<<"PreOrder: "; PreOrder(root); cout<<endl;
+    cout<<"PostOrder: ";PostOrder(root);cout<<endl;
+    cout<<"BFS: ";BFS(root);cout<<endl;
+    cout<<"DFS: ";DFS(root);cout<<endl;
+
+
+
+    // Search
+    int k = 8;
+    cout<<k << (Search(root,k)? " se encuentra en el BST" : " no se encuentra en el BST")<<endl;
+
+    //Min and Max;
+    cout<< "Max: "<<findMax(root)<<endl;
+    cout<< "Min: "<<findMin(root)<<endl;
+
+    //Height of a BT
+    cout<<"Height: "<< findHeight(root)<<endl;
 }
 
 void setIO(){
@@ -155,7 +225,7 @@ void setIO(){
 int main()
 {
     
-
+    // if(getenv("CP_IO")){setIO();}
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
