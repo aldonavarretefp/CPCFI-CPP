@@ -130,7 +130,7 @@ int tsp(int pos, int bitmask) { // bitmask stores the visited coordinates
 }
 
 int main() {
-    if(getenv("CP_IO")){setIO();}
+  if(getenv("CP_IO")){setIO();}
   scanf("%d", &TC);
   while (TC--) {
     scanf("%d %d", &xsize, &ysize); // these two values are not used
