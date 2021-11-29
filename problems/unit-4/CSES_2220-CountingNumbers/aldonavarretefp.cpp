@@ -99,6 +99,7 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 int64 NADJN(int64 n, vector<int64> dp){
+    // Si el numero es cero, recordemos que solo tiene 1 combinacion, que es el mismo.
     if(n < 1){
         if(n == 0) return 1;
         else return 0;
@@ -107,28 +108,37 @@ int64 NADJN(int64 n, vector<int64> dp){
     int64 ans = 0;
     string snum = to_string(n);
     int lenNums = (int) snum.length();
-    //add the first 9 possible combinations.
+
+    //add the first possible combinations.
     FO(i,lenNums){
         ans += dp[i];
     }
     int previousDigit = 0;
     FO(i,lenNums){
-        int currDigit = snum[i] - '0';
-        int rest = lenNums - i - 1;
-        int under = (previousDigit < currDigit) ? currDigit - 1 : currDigit;
-        ans += (currDigit == 0 ) ? 0 : under * dp[rest];
-        if(previousDigit == currDigit) return ans;
+        int currDigit = snum[i] - '0'; // ASCII -> int
+        int rest = lenNums - i - 1; //rest is the number of digits left.
+        int under = (previousDigit < currDigit) 
+                    ? currDigit - 1 
+                    : currDigit;
+        ans += (currDigit == 0 ) 
+                ? 0 
+                : under * dp[rest];
+        if(previousDigit == currDigit) // Caso donde rompiamos para el 122
+            return ans;
         previousDigit = currDigit;
     }
-    return ans+1;
+    return ans+1; // Incluimos al numero.
 
 
 
 }
 void solve(){
     int64 a, b; cin>>a >> b;
-    vector<int64> dp(19); dp[0]=1;
+    vector<int64> dp(19);  //MAX 18 digitos
+    dp[0]=1; // Caso base para 0 digitos. (Él mismo)
     int64 nineFactor = 1;
+
+    //Llenando posibilidades
     FOR(i,1,19,1) {
         nineFactor *= 9;
         dp[i] = nineFactor;
