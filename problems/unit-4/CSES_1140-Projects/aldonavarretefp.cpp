@@ -100,7 +100,6 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #endif
 struct project{
     int64 start,end,reward;
-
 };
 bool comp(project a, project b){
     return a.end < b.end;
@@ -120,12 +119,13 @@ void solve(){
     //Print p vector
     // FO(i,n) cout<< p[i].start << " " << p[i].end << " " << p[i].reward << endl;
 
-    map<int64,int64> m;
+    map<int64,int64> m; //end-> max ya vista
     m[0] = 0;
 
     int64 max_reward = 0, totalReward = 0;
 
     vector<project>::iterator curr;
+
     for(curr = p.begin(); curr != p.end(); curr++){
         
         map<int64,int64>::iterator prev = m.lower_bound(curr->start);prev--;
