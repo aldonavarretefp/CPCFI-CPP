@@ -16,12 +16,12 @@ class Node{
 }
 
 const BFS = (root) => {
-    if(root === null) return [];
+    if(root === null) return;
     const values = [];
     const queue = [root];
 
     while(queue.length > 0){
-
+        
         const curr = queue.shift();
 
         values.push(curr.val);
@@ -49,4 +49,5 @@ b.right = e;
 c.right = f; 
 
 console.log(BFS(a));
+console.log(BFS(b));
 
