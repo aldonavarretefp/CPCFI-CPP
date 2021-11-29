@@ -32,12 +32,25 @@ Clasico: cuantas expresiones conteniendo n pares de parentesis que se cierran en
 Numero de maneras en que un poligono convexo (aquel que todos sus angulos internos son menores o iguales a 180 grados) de n+2 lados puede ser formado.
 ejemplo: pentagono -> 5 lados, 
 n+2 = 5; n = 3;
+ans = Cat(3);
 <br><br>
 Grid de izquierda a derecha, de abajo hacia arriba por debajo de la diagonal. Usando distancias manhattan
 <br>
 
 
+## Probabilidades Theory
 
+
+## DP Con strings
+Longest String Subsequence & Align String<br>
+Ambos estuvieron faciles de entender 
+Se parecen mucho a los problemas de Edit Distance
+
+## DP With Bitmask
+
+### Forming Quiz Teamz
+
+# Parametros comúnes para programación dinámica
 
 
 
