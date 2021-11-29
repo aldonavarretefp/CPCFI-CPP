@@ -107,11 +107,11 @@ void solve(){
     // Creando la lista LIS
     vector<int> LIS;
     for(int i = 0 ; i < n ; i++){
-        auto low = lower_bound(all(LIS), nums[i]); // Busca el primer elemento mayor que nums[i]
+        auto low = lower_bound(all(LIS), nums[i]); // Busca el primer elemento mayor
         debug(LIS);
         debug(nums[i], low - LIS.begin());
 
-        if(low == LIS.end()) 
+        if(low == LIS.end()) //Si no lo encuentra , agrégalo en donde debería estar
             LIS.PB(nums[i]);
         else 
             LIS[low - LIS.begin()] = nums[i];
