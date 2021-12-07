@@ -104,6 +104,7 @@ int64 NADJN(int64 n, vector<int64> dp){
         if(n == 0) return 1;
         else return 0;
     }
+
     // Traverse through number
     int64 ans = 0;
     string snum = to_string(n);
@@ -115,9 +116,9 @@ int64 NADJN(int64 n, vector<int64> dp){
     }
     int previousDigit = 0;
     FO(i,lenNums){
-        int currDigit = snum[i] - '0'; // ASCII -> int
+        int currDigit = snum[i] - '0'; // ASCII -> int 
         int rest = lenNums - i - 1; //rest is the number of digits left.
-        int under = (previousDigit < currDigit) 
+        int under = (previousDigit < currDigit)  //Podría colisionar con el anterior.
                     ? currDigit - 1 
                     : currDigit;
         ans += (currDigit == 0 ) 
@@ -135,7 +136,7 @@ int64 NADJN(int64 n, vector<int64> dp){
 void solve(){
     int64 a, b; cin>>a >> b;
     vector<int64> dp(19);  //MAX 18 digitos
-    dp[0]=1; // Caso base para 0 digitos. (Él mismo)
+    dp[0]=1; 
     int64 nineFactor = 1;
 
     //Llenando posibilidades

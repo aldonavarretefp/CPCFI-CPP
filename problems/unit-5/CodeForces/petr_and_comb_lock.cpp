@@ -98,117 +98,51 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #else
 #define debug(x...)
 #endif
-//Struct
-struct Node{
-    int data;
-    Node * left;
-    Node * right;
-    Node(int v){ 
-        data = v; 
-        left = NULL;
-        right = NULL;
-    }
-};
-//Functions
-struct Node * insert(Node * root,int value){
-    if (!root) return new Node(value);
-    if(value <= root->data ) root->left = insert(root->left, value);
-    else                     root->right = insert(root->right, value);
-    return root;
-}
-bool Search(Node * root,int k){
-    if(!root) return false;
-    if(root->data == k) return true;
-    if(k <= root->data) return Search(root->left,k);
-    else                return Search(root->right,k); 
-    
-}
-
-int findMin(Node * root){
-    Node * curr = root;
-    while(curr->left != NULL) curr = curr->left;
-    return curr->data;
-
-}
-int findMax(Node * root){
-    Node * curr = root;
-    while(curr->right != NULL) curr = curr->right;
-    return curr->data;
-
-}
-int findHeight(Node * root){
-    if(!root) return -1;
-    return 1 + max( findHeight(root->left), findHeight(root->right) );
-}
-
-//Traversals
-void InOrder(Node * root){
-    if(!root) return;
-    InOrder(root->left);
-    cout<<root->data<<" ";
-    InOrder(root->right);
-}
-void PreOrder(Node * root ){
-    if(!root) return;
-    cout<<root->data<<" ";
-    PreOrder(root->left);
-    PreOrder(root->right);
-
-}
-void PostOrder(Node * root ){
-    if (!root) return;
-    PostOrder(root->left);
-    PostOrder(root->right);
-    cout<<root->data<<" ";
-}
-void BFS(Node * root ){
-    if(!root) return;
-    queue<Node *> q; q.push(root);
-    while(!q.empty()){
-        Node * curr = q.front(); q.pop(); 
-        cout<<curr->data<<" ";
-        if(curr->left != NULL) q.push(curr->left);
-        if(curr->right != NULL) q.push(curr->right);
-    }
-}
-void DFS(Node * root ){
-    if(!root) return;
-    stack<Node *> s; s.push(root);
-    while(!s.empty()){
-        Node * curr = s.top(); s.pop();
-        cout<<curr->data<<" ";
-        if(curr->right) s.push(curr->right);
-        if(curr->left) s.push(curr->left);
-    }
-}
-
 void solve(){
-    Node * root = NULL;
-    root = insert(root,9); // La primera vez se modifica la raiz.
-    insert(root,10);
-    insert(root,2);
-    insert(root,3);
-    insert(root,1);
-    insert(root,8);
+    //Puedo hacer todas las posibles combinaciones de los numeros,
+    // eso sería factorial, mejor lo represento con un bitmask
 
-    cout<<"InOrder: ";  InOrder(root);  cout<<endl;
-    cout<<"PreOrder: "; PreOrder(root); cout<<endl;
-    cout<<"PostOrder: ";PostOrder(root);cout<<endl;
-    cout<<"BFS: ";BFS(root);cout<<endl;
-    cout<<"DFS: ";DFS(root);cout<<endl;
+    int n; cin>>n;
+    VI a(n);
+    REP(i,n) cin>>a[i];
+    debug(a);
+
+    int total = 0;
+    /*
+        10,20,30
+
+        000 10+20+30  =  60
+        001 10+20-30  =   0
+        010 +10-20+30 =  20
+        011 10-20-30  = -40
+        100 -10+20+30 = -40
+        101 -10+20-30 = -20
+        110 -10-20+30 =   0
+        111 -10-20-30 = -60
 
 
 
-    // Search
-    int k = 8;
-    cout<<k << (Search(root,k)? " se encuentra en el BST" : " no se encuentra en el BST")<<endl;
+        101
+        110
+        111
 
-    //Min and Max;
-    cout<< "Max: "<<findMax(root)<<endl;
-    cout<< "Min: "<<findMin(root)<<endl;
+    */
 
-    //Height of a BT
-    cout<<"Height: "<< findHeight(root)<<endl;
+    FO(i,1<<n){
+        total = 0;
+        FO(j,n){
+            //If it is on, make it counterclockwise
+            if(i&(1<<j))
+                total-=a[j];
+            else
+                total+=a[j];
+        }
+        if (total % 360 == 0){
+            cout<<"YES\n";
+            return;
+        }
+    }
+    cout<<"NO\n";
 }
 
 void setIO(){
@@ -225,7 +159,7 @@ void setIO(){
 int main()
 {
     
-    // if(getenv("CP_IO")){setIO();}
+    if(getenv("CP_IO")){setIO();}
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);

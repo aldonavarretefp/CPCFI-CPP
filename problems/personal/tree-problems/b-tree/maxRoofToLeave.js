@@ -1,7 +1,7 @@
-//         a
-//     b       c
-//   d   e       f
-/**  BFS TRAVERSAL SUM
+//         5
+//     11       3
+//   4   2        1
+/**  BFS MAX ROOT TO LEAF
  * Recuerda que en este algoritmo se emplea una queue, 
  * La complejidad es O(n), porque vemos cada uno de los nodos.
  */

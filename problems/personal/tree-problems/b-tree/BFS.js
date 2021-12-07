@@ -33,7 +33,26 @@ const BFS = (root) => {
     return values;
 
 }
-
+//Levels
+const levels = (root) => {
+    if(root === null) return;
+    const queue = [root];
+    let level = 0;
+    while(queue.length > 0){
+        const q_size = queue.length;
+        process.stdout.write(`level ${level}: `);
+        for(let i = 0; i < q_size; i++){
+            const curr = queue.shift();
+            process.stdout.write(`${curr.val} `);
+            if(curr.left) 
+                queue.push(curr.left);
+            if(curr.right) 
+                queue.push(curr.right); 
+        }
+        process.stdout.write('\n');
+        level++;
+    }
+}
 
 const a = new Node("a");
 const b = new Node("b");
@@ -50,4 +69,5 @@ c.right = f;
 
 console.log(BFS(a));
 console.log(BFS(b));
+console.log(levels(a));
 
