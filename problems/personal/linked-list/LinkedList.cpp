@@ -102,6 +102,7 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 struct Node {
     int data;
     Node* next;
+    
     Node(int d) {
         data = d;
         next = NULL;
@@ -189,29 +190,83 @@ void printReverseRecursive(Node* p)
     cout << p->data << " "; 
 } 
 
+void insertAtEnd(Node** head, int value){
+    Node* temp = new Node(value);
+    Node* curr = *head;
 
-void solve(){
-    Node* head = NULL;
-    int n=5;
-    FO(i,n){
-        insertAtBeggining(&head,i+1);
-
+    while(curr->next != NULL){
+        curr = curr->next;
     }
+    curr->next = temp;
+}
+Node* reverse(Node **head) {
+  //1. Create dummy list
+  Node* dummy = new Node(1); dummy->next = *head;
+  Node* left_prev = dummy;
+  Node* curr = *head;
+  Node* prev = NULL;
+  while(curr){
+    cout<<"curr->data : "<<curr->data<<endl;
+    if (curr->data%2==0 ){
+      cout<<"even "<<curr->data<<endl;
+      prev = NULL;
+      while(curr && curr->data%2 == 0){
+        
+        // printf("lp: %d curr: %d \n",left_prev->data,curr->data);
+        Node* temp = curr->next;
+        curr->next = prev;
+        cout<<"aqui pasa -2"<<endl;
+        prev = curr;
+        cout<<"aqui pasa -1"<<endl;
+        curr = temp;
+        cout<<"aqui pasa 0"<<endl;
+
+      }
+      left_prev->next->next = (curr)?curr:NULL;
+      //aqui pasa
+      cout<<"aqui pasa 1"<<endl;
+      left_prev->next       = prev;
+      cout<<"aqui pasa 2"<<endl;
+    }else{
+        left_prev = curr;
+        curr = curr->next;
+    }
+  }
+  return dummy->next;
+}
+
+/**
+ * 1, 2, 8, 9, 12, 16
+ *              p   c
+ *          lp
+ */        
+void solve(){
+    //1, 2, 8, 9, 12, 16]
+    Node* head = new Node(1);
+    int n=5;
+    insertAtEnd(&head,2);
+    insertAtEnd(&head,8);
+    insertAtEnd(&head,9);
+    insertAtEnd(&head,12);
+    insertAtEnd(&head,16);
+
     printLinkedList(head);
 
-    reverseLinkedList(&head);
-    printLinkedList(head);
-    // deleteAtIndex(&head,0);
-    // deleteAtIndex(&head,20);
-    cout<<"Recursive: ";
-    printRecursive(head);
-    cout<<endl;
-    cout<<"Recursive Reversed(print): ";
-    printReverseRecursive(head);
-    cout<<endl;
-    cout<< "Reverse recursive: ";
-    reverseRecursive(&head,head);
-    printLinkedList(head);
+    Node* head2 = reverse(&head);
+    printLinkedList(head2);
+
+    // reverseLinkedList(&head);
+    // printLinkedList(head);
+    // // deleteAtIndex(&head,20);
+    // cout<<"Recursive: ";
+    // printRecursive(head);
+    // cout<<endl;
+    // cout<<"Recursive Reversed(print): ";
+    // printReverseRecursive(head);
+    // cout<<endl;
+    // cout<< "Reverse recursive: ";
+    // reverseRecursive(&head,head);
+    // printLinkedList(head);
     
     
 
@@ -219,17 +274,6 @@ void solve(){
     
 
 }
-
-void setIO(){
-  string file = __FILE__;
-  file = string(file.begin(),file.end()-3);
-  string input_file = file + "in";
-  string output_file = file + "out";
-  freopen(input_file.c_str(), "r",stdin);
-  freopen(output_file.c_str(),"w",stdout);
-  
-}
-
 /********** Main()  function **********/
 int main()
 {
