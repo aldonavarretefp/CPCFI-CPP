@@ -19,7 +19,7 @@
 const maxRootToLeafDFSRecursive = (root) => {
     if(root === null) return -Infinity;
     if(root.left === null && root.right === null) return root.val;
-    return Math.max(root.val + maxRootToLeafDFSRecursive(root.left), root.val + maxRootToLeafDFSRecursive(root.right));
+    return root.val + Math.max(maxRootToLeafDFSRecursive(root.left),maxRootToLeafDFSRecursive(root.right));
 }
 
 const a = new Node(5);

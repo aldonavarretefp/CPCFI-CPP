@@ -48,17 +48,19 @@ const DFSRecursive2 = (root) => {
     if(root.right) DFSRecursive2(root.right);
 }
 var result = [];
-const dfspath = (root,totalSum ) => {
+const dfspath = (root,path) => {
     if(root == null) return;
-    console.log(root.val);
-    totalSum += root.val;
+    
+    path.push(root.val);
 
     //leaf node
-    if(!root.left && !root.right)
-      result.push(totalSum);
-    if(root.left) dfspath(root.left, totalSum);
-    if (root.right) dfspath(root.right, totalSum);
-  } 
+    if(!root.left && !root.right){
+        result.push(path);
+        return;
+    }
+    if(root.left) dfspath(root.left, path);
+    if (root.right) dfspath(root.right, path);
+} 
 
 
 
@@ -88,5 +90,5 @@ console.log(DFSIterative(a));
 console.log(DFSRecursive(a));
 console.log(inorder(a));
 console.log(DFSRecursive2(a));
-dfspath(a,0);
+dfspath(a,[]);
 console.log(result);

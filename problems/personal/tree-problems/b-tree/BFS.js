@@ -69,9 +69,6 @@ const bfsR = (root) =>{
         if(curr.right) 
           queue.push(curr.right);
       }
-      // Get the last element of the queue
-      // apendd it to the result array
-      // Dont remove it from the queue
       if(queue.length > 0){
         let last = queue[queue.length-1];
         result.push(last.val);
@@ -104,3 +101,9 @@ console.log(levels(a));
 
 bfsR(a);
 console.log(result);
+
+/**
+ *    1
+ *  2   3
+ * 4 5  
+ */

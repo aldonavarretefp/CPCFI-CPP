@@ -1,6 +1,6 @@
-//         a
-//     b       c
-//   d   e       f
+//         3
+//     11      4
+//   4   2       1
 /**  BFS TRAVERSAL SUM
  * Recuerda que en este algoritmo se emplea una queue, 
  * La complejidad es O(n), porque vemos cada uno de los nodos.

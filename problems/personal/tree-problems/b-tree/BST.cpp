@@ -138,7 +138,7 @@ int findMax(Node * root){
 }
 int findHeight(Node * root){
     if(!root) return -1;
-    return 1 + max( findHeight(root->left), findHeight(root->right) );
+    return 1 + max(findHeight(root->left), findHeight(root->right));
 }
 
 //Traversals
@@ -211,26 +211,17 @@ void solve(){
     cout<<"Height: "<< findHeight(root)<<endl;
 }
 
-void setIO(){
-  string file = __FILE__;
-  file = string(file.begin(),file.end()-3);
-  string input_file = file + "in";
-  string output_file = file + "out";
-  freopen(input_file.c_str(), "r",stdin);
-  freopen(output_file.c_str(),"w",stdout);
-  
-}
-
 /********** Main()  function **********/
-int main()
-{
+int main(){
     
-    // if(getenv("CP_IO")){setIO();}
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
     int T=1;
     FO(tc,T)
         solve();
     return 0;
 }
+
+/**
+ *      9
+ *    2  10
+ *  1 3  8 
+ */ 
