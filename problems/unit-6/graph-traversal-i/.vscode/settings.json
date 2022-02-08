@@ -21,6 +21,8 @@
     "peacock.color": "#dd0531",
     "files.associations": {
         "vector": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "queue": "cpp",
+        "stack": "cpp"
     }
 }

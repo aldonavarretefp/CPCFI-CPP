@@ -125,17 +125,19 @@ void _print(T t, V... v)
 
 
 bool visited[1001][1001];
+
 bool outOfBounds(vector<vector<char> > &grid, int r, int c){
     if(r < 0 ) return true;
     if(c < 0 ) return true;
-    if(r == grid.size()) return true;
-    if(c == grid[0].size()) return true;
+    if(r >= grid.size()) return true;
+    if(c >= grid[0].size()) return true;
     return false;
 }
 void dfs(vector< vector<char> > &grid, int r , int c){
-    if(outOfBounds(grid, r, c) || visited[r][c])  return;
-    visited[r][c] = 1;
-    cout<<"current cell is "<<r<<" "<<c<<endl;
+    if(outOfBounds(grid, r, c) || grid[r][c] != '.')  return;
+
+    grid[r][c] = '2';
+
     dfs(grid, r+1, c);
     dfs(grid, r-1, c);
     dfs(grid, r, c+1);
@@ -146,17 +148,15 @@ void solve(){
     int numOfRooms = 0;
     cin >> n >> m;
     vector< vector<char> > grid(n, vector<char>(m));
-    REP(i, n){
-        REP(j, m){
+    FO(i, n){
+        FO(j, m){
             cin >> grid[i][j];
         }
-        getchar();
     }
-    //print(grid);
     for(int r = 0 ; r < n ; r++){
         for(int c = 0 ; c < m ; c++){
             //if it is not visited, mark all its neighbours as visited
-            if(grid[r][c] == '.' && !visited[r][c] ){
+            if(grid[r][c] == '.' ){
                 dfs(grid,r,c);
                 numOfRooms++;
             }
