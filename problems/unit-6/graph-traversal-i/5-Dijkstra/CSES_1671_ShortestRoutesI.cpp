@@ -109,9 +109,7 @@ void solve(){
     cin>>n>>m;
     g.resize(n+1);
     dist.resize(n+1,MAXD);
-    for(int i = 0 ; i < n; i++){
-        dist[i] = MAXD;
-    }
+    
 
 	for(int  i = 0; i < m; ++i){
         int u, v, c;
@@ -121,8 +119,8 @@ void solve(){
     priority_queue<pair<int,int>,
     vector<pair<int,int> >,
     greater<pair<int,int> > > pq;
-    dist[1] = 0;
-    pq.push(MP(0,1));
+    dist[1] = 0; // from source
+    pq.push(MP(0,1));  //dist, vertex
     while(!pq.empty()){
 
         int u = pq.top().second;
@@ -143,7 +141,7 @@ void solve(){
             }
         }
     }
-    debug(dist);
+
     for(int i = 1; i <= n; ++i){
         cout<<dist[i]<<" ";
     }
