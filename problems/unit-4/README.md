@@ -31,7 +31,7 @@ Es un caso similar al de MONEYSUMS.<br>
 <p align="center"> <img src="./CSES_1158-BookShop/IMG_4014.JPG"/> </p>
 <p align="center"> <img src="./CSES_1158-BookShop/IMG_4016.JPG"/> </p>
 
-## LIS (Longest Increasing Subsequence
+## LIS (Longest Increasing Subsequence)
 Este es un problema típico de entrevista en el que tienes que encontrar dado un arreglo 
 al subarray creciente más largo y dar su length.
 Para esto hay que ir iterando por cada uno de los elementos en un array pero
