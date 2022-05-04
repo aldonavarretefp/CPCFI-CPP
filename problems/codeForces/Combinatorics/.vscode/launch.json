@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": true,
+      "cwd": "/Users/navarrete/Desktop/sw_engineering/CPCFI-CPP/problems/codeForces/Combinatorics",
+      "environment": [],
+      "program": "/Users/navarrete/Desktop/sw_engineering/CPCFI-CPP/problems/codeForces/Combinatorics/build/Debug/outDebug",
+      "internalConsoleOptions": "openOnSessionStart",
+      "MIMode": "gdb",
+      "console": "integratedTerminal"
+    }
+  ]
+}
