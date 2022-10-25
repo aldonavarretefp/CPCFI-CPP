@@ -1,8 +1,3 @@
-/* 
-    https://cses.fi/problemset/task/1674/
-
-*/
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -47,7 +42,7 @@ using namespace std;
 #define MEM(a, b) memset(a, (b), sizeof(a))
 #define FOR(i, j, k, in) for (int i=j ; i<k ; i+=in)
 #define RFOR(i, j, k, in) for (int i=j ; i>=k ; i-=in)
-#define REP(i, n) for(int i=1 ; i<=n; i++)
+#define REP(i, j) FOR(i, 0, j, 1)
 #define RREP(i, j) RFOR(i, j, 0, 1)
 #define all(cont) cont.begin(), cont.end()
 #define rall(cont) cont.end(), cont.begin()
@@ -104,49 +99,68 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 
-#define int long long
-
-VI ar[200005];
-int sub[200005];
-
-int dfs(int node){
-    sub[node] = 0;
-	for(int child : ar[node])
-	dfs(child) , sub[node] += 1 + sub[child];
-    
-}
+struct Task{
+    int64 duration,deadline,index;
+    Task(int64 d,int64 dl,int64 i):duration(d),deadline(dl),index(i){}
+    bool operator<(const Task &t)const{
+        return deadline<t.deadline;
+    }
+};
 
 
 void solve(){
-    int n,x;
-    cin>>n;
+    int64 nTasks;
+    cin >> nTasks;
+    vector<Task> tasks;
+    int64 index =1;
+    while(nTasks--){      
+        int64 n, d;
+        cin >> n >> d;
+        tasks.PB(Task(n,d,index));
+        index++;
+    }
+    sort(all(tasks) );
+    int64 currTime = 0;
+    vector<int64> completed;
+
+    for(Task t:tasks){
+        currTime+=t.duration;
+        debug(currTime,t.deadline);
+        if(currTime>t.deadline){
+            cout << "*";
+            return;
+        }
+        completed.PB(t.index);
+    }
+    debug(completed);
+    for(int64 i:completed){
+        cout << i << " ";
+    }
+
+
     
-    for(int i = 2 ; i <= n; i++){
-        cin>>x;
-        ar[x].PB(i); // Agregamos a sus descendientes
-    }
 
-    dfs(1);
-
-    REP(i,n){
-        cout<<sub[i] <<" ";
-    }
 }
 
+
 void setIO(){
-    string file = __FILE__;
-    file = string(file.begin(),file.end()-3);
-    string input_file = file + "in";
-    string output_file = file + "out";
-    freopen(input_file.c_str(), "r",stdin);
-    freopen(output_file.c_str(),"w",stdout);
+  string file = __FILE__;
+  file = string(file.begin(),file.end()-3);
+  string input_file = file + "in";
+  string output_file = file + "out";
+  freopen(input_file.c_str(), "r",stdin);
+  freopen(output_file.c_str(),"w",stdout);
+  
 }
 
 /********** Main()  function **********/
-int32_t main(){
+int main()
+{
     
     if(getenv("CP_IO")){setIO();}
-    fastIO;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
     int T=1;
     FO(tc,T)
         solve();

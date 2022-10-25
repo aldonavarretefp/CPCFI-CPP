@@ -1,8 +1,3 @@
-/* 
-    https://cses.fi/problemset/task/1674/
-
-*/
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -47,7 +42,7 @@ using namespace std;
 #define MEM(a, b) memset(a, (b), sizeof(a))
 #define FOR(i, j, k, in) for (int i=j ; i<k ; i+=in)
 #define RFOR(i, j, k, in) for (int i=j ; i>=k ; i-=in)
-#define REP(i, n) for(int i=1 ; i<=n; i++)
+#define REP(i, j) FOR(i, 0, j, 1)
 #define RREP(i, j) RFOR(i, j, 0, 1)
 #define all(cont) cont.begin(), cont.end()
 #define rall(cont) cont.end(), cont.begin()
@@ -103,34 +98,37 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #else
 #define debug(x...)
 #endif
-
-#define int long long
-
-VI ar[200005];
-int sub[200005];
-
-int dfs(int node){
-    sub[node] = 0;
-	for(int child : ar[node])
-	dfs(child) , sub[node] += 1 + sub[child];
-    
-}
-
-
 void solve(){
-    int n,x;
-    cin>>n;
+
+    //subsequence consecutive elements differ by k 
+    int64 n,k;
+    cin>>n>>k;
+    if( n==1 ){
+        cout<<0<<endl;
+        return;
+    }
+    vector<int64> v(n+1);
+    for(int64 i=1;i<=n;i++){
+        cin>>v[i];
+    }
+    vector<int64> dp(n+1,0);
+    dp[0]=1;   
+    int64 lastNumber = v[1];
+    for(int64 i=1;i<=n;i++){
+        //cout<<"i: "<<i<<" dif: "<<v[i]<<"-"<<lastNumber<<" "<<"="<<abs(v[i]-lastNumber)<<endl;
+        if(abs(v[i]-lastNumber)>=k){
+            //cout<<"here";
+            dp[i]=dp[i-1]+1;
+            lastNumber = v[i];
+        }else{
+            dp[i]=dp[i-1];
+        }
+        //cout<<endl;
+    }
+    cout<<dp[n]<<endl;
+    //debug(dp,dp.size());
+    //debug(v);
     
-    for(int i = 2 ; i <= n; i++){
-        cin>>x;
-        ar[x].PB(i); // Agregamos a sus descendientes
-    }
-
-    dfs(1);
-
-    REP(i,n){
-        cout<<sub[i] <<" ";
-    }
 }
 
 void setIO(){
@@ -146,7 +144,6 @@ void setIO(){
 int32_t main(){
     
     if(getenv("CP_IO")){setIO();}
-    fastIO;
     int T=1;
     FO(tc,T)
         solve();

@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": true,
+      "cwd": "/Users/navarrete/Desktop/sw_engineering/CPCFI-CPP/Contests/2019-2020_ACM-ICPC_Brazil_Subregional_Programming_Contest",
+      "environment": [],
+      "program": "/Users/navarrete/Desktop/sw_engineering/CPCFI-CPP/Contests/2019-2020_ACM-ICPC_Brazil_Subregional_Programming_Contest/build/Debug/outDebug",
+      "internalConsoleOptions": "openOnSessionStart",
+      "MIMode": "gdb",
+      "console": "integratedTerminal"
+    }
+  ]
+}

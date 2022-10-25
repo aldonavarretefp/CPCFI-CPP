@@ -1,8 +1,3 @@
-/* 
-    https://cses.fi/problemset/task/1674/
-
-*/
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -47,7 +42,7 @@ using namespace std;
 #define MEM(a, b) memset(a, (b), sizeof(a))
 #define FOR(i, j, k, in) for (int i=j ; i<k ; i+=in)
 #define RFOR(i, j, k, in) for (int i=j ; i>=k ; i-=in)
-#define REP(i, n) for(int i=1 ; i<=n; i++)
+#define REP(i, j) FOR(i, 0, j, 1)
 #define RREP(i, j) RFOR(i, j, 0, 1)
 #define all(cont) cont.begin(), cont.end()
 #define rall(cont) cont.end(), cont.begin()
@@ -104,33 +99,79 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 
-#define int long long
+struct building {
+    int height;
+    int start;
+    int end;
 
-VI ar[200005];
-int sub[200005];
-
-int dfs(int node){
-    sub[node] = 0;
-	for(int child : ar[node])
-	dfs(child) , sub[node] += 1 + sub[child];
-    
-}
-
+    building(int s, int e, int h) {
+        height = h;
+        end = e;
+        start = s;
+    }
+    bool operator < (const building &b) const {
+        return start < b.start;
+    }
+};
 
 void solve(){
-    int n,x;
-    cin>>n;
-    
-    for(int i = 2 ; i <= n; i++){
-        cin>>x;
-        ar[x].PB(i); // Agregamos a sus descendientes
-    }
+    /*
+        Given  all the starting point of a building
+        its width and height, find total distance to reach the end point 
+        end point is equal to 100.
 
-    dfs(1);
-
-    REP(i,n){
-        cout<<sub[i] <<" ";
+    */
+   int n;
+   cin>>n;
+    vector<building> buildings;
+    int start,end,height;
+    FO(i,n){
+        cin>>start>>end>>height;
+        buildings.push_back(building(start,start+end,height));
     }
+    sort(all(buildings));
+    FO(i,n){
+        debug(buildings[i].start,buildings[i].end,buildings[i].height);
+    }
+    //sum all the heights to walk up and down
+    int distanceAdded = buildings[0].height;
+
+    FO(i,n){
+        debug(distanceAdded,i);
+        debug(buildings[i].height);
+        building b = buildings[i];
+        building nextB = buildings[i+1];
+        
+        //if they are together , check heights
+        if(b.end == nextB.start){
+            
+                
+            int newDistance = b.height - nextB.height;
+            if(newDistance < 0){
+                newDistance *= -1;
+            }
+            distanceAdded += newDistance;
+        
+        }else{
+
+            if(i == n-1){
+                debug("last");
+                break;
+            }
+            distanceAdded += b.height;
+        }
+        
+
+    }
+    building last = buildings[n-1];
+    debug(last.height)  ;
+    distanceAdded+= buildings[n-1].height;
+
+    debug(distanceAdded);
+
+    cout<<100 + distanceAdded<<endl;
+
+        
 }
 
 void setIO(){

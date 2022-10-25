@@ -1,8 +1,3 @@
-/* 
-    https://cses.fi/problemset/task/1674/
-
-*/
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -47,7 +42,7 @@ using namespace std;
 #define MEM(a, b) memset(a, (b), sizeof(a))
 #define FOR(i, j, k, in) for (int i=j ; i<k ; i+=in)
 #define RFOR(i, j, k, in) for (int i=j ; i>=k ; i-=in)
-#define REP(i, n) for(int i=1 ; i<=n; i++)
+#define REP(i, j) FOR(i, 0, j, 1)
 #define RREP(i, j) RFOR(i, j, 0, 1)
 #define all(cont) cont.begin(), cont.end()
 #define rall(cont) cont.end(), cont.begin()
@@ -104,32 +99,65 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 
-#define int long long
+const int64 M= 1000000007;
+int64 n;
+vector<int64> people;
+vector<int64 > combination;
 
-VI ar[200005];
-int sub[200005];
-
-int dfs(int node){
-    sub[node] = 0;
-	for(int child : ar[node])
-	dfs(child) , sub[node] += 1 + sub[child];
-    
+long long mod(long long x){
+    return ((x%M + M)%M);
+}
+long long add(long long a, long long b){
+    return mod(mod(a)+mod(b));
+}
+long long mul(long long a, long long b){
+    return mod(mod(a)*mod(b));
 }
 
 
+void pretty_print(const vector<int64 >& v, set<int64 >& s) {
+
+  static int count = 0;
+  cout << "combination no " << (++count) << ": [ ";
+  for (int i = 0; i < v.size(); ++i) { 
+    cout << v[i] << " ";
+    s.insert(v[i]);
+   }
+   .push_back(s);
+  cout << "] " << endl;
+}
+
+void go(int offset, int k,set<int64> &s,vector<set<int64> > &v) {
+  debug(s); 
+  if (k == 0) {
+    debug(combination);
+    pretty_print(combination, s);
+    return;
+  }
+  if(s.size()==k){
+    v.push_back(s);
+    debug(v);
+  }
+  for (int64 i = offset; i <= people.size() - k; ++i) {
+    s.insert(people[i]);
+    combination.push_back(people[i]);
+    go(i+1, k-1,s,v);
+  }
+  
+}
+
 void solve(){
-    int n,x;
-    cin>>n;
-    
-    for(int i = 2 ; i <= n; i++){
-        cin>>x;
-        ar[x].PB(i); // Agregamos a sus descendientes
+    int64 k,s; 
+    cin>>n>>k>>s;debug(n,k,s);
+    people.resize(n);
+    FO(i,n) {
+        cin>>people[i];
     }
-
-    dfs(1);
-
-    REP(i,n){
-        cout<<sub[i] <<" ";
+    debug(people);
+    vector<set<int64> > v;
+    FO(i,k){
+        set<int64> s;
+        go(0,i+1,s,v);
     }
 }
 

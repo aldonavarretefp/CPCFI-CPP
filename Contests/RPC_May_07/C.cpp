@@ -1,8 +1,3 @@
-/* 
-    https://cses.fi/problemset/task/1674/
-
-*/
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -47,14 +42,13 @@ using namespace std;
 #define MEM(a, b) memset(a, (b), sizeof(a))
 #define FOR(i, j, k, in) for (int i=j ; i<k ; i+=in)
 #define RFOR(i, j, k, in) for (int i=j ; i>=k ; i-=in)
-#define REP(i, n) for(int i=1 ; i<=n; i++)
+#define REP(i, j) FOR(i, 0, j, 1)
 #define RREP(i, j) RFOR(i, j, 0, 1)
 #define all(cont) cont.begin(), cont.end()
 #define rall(cont) cont.end(), cont.begin()
 #define FOREACH(it, l) for (auto it = l.begin(); it != l.end(); it++)
 #define FO(i, b) for(int  i = 0; i<b; i++)
 #define IN(A, B, C) assert( B <= A && A <= C)
-#define MP make_pair
 #define PB push_back
 #define INF (int)1e9
 #define EPS 1e-9
@@ -104,33 +98,39 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 
-#define int long long
-
-VI ar[200005];
-int sub[200005];
-
-int dfs(int node){
-    sub[node] = 0;
-	for(int child : ar[node])
-	dfs(child) , sub[node] += 1 + sub[child];
-    
-}
-
-
 void solve(){
-    int n,x;
-    cin>>n;
-    
-    for(int i = 2 ; i <= n; i++){
-        cin>>x;
-        ar[x].PB(i); // Agregamos a sus descendientes
-    }
 
-    dfs(1);
+    // int  v[5];
+    // FO(i,5)
+    //     cin>>v[i];
+    // reverse (v,v+5);
 
-    REP(i,n){
-        cout<<sub[i] <<" ";
-    }
+    // do {
+    //     int64 MP, W,D,L,Pts;
+    //     MP = v[0], W = v[1], D = v[2], L = v[3], Pts = v[4];
+    //     debug(MP,W,D,L,Pts);
+    //     cout<<MP<<" "<<W<<" "<<D<<" "<<L<<" "<<Pts<<endl;
+
+    //     if(MP == W + D + L && Pts == (W*3) + (D*1) + (L*0)){
+    //         cout<<MP<<" "<<W<<" "<<D<<" "<<L<<" "<<Pts;
+    //     }
+    // } while ( std::prev_permutation(v,v+5) );
+    vector<int64> v(5);
+    FO(i,5) cin>>v[i];
+    // reverse(all(v));
+    debug(v);
+    sort(all(v));
+    do {
+        int64 MP, W,D,L,Pts;
+        MP = v[0], W = v[1], D = v[2], L = v[3], Pts = v[4];
+        // debug(MP,W,D,L,Pts);
+        
+
+        if( (MP == W + D + L) && Pts==(W*3 +D)  ){
+            cout<<MP<<" "<<W<<" "<<D<<" "<<L<<" "<<Pts;
+        }
+    } while (next_permutation(all(v)));
+        
 }
 
 void setIO(){
