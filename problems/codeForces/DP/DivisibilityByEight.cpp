@@ -127,49 +127,57 @@ void _print(T t, V... v)
 void solve()
 {
     string s;
-    cin >> s;
-    int n = s.size();
-    int x, y, z;
-    debug(n);
-    for (char c : s) {
-        if ((c-'0')%8==0) {
-            cout << "YES\n" << c << "\n";
+    cin>>s;
+    for(int i = 0; i < s.size(); i++){
+        if((s[i]-'0')%8==0){
+            cout<<"YES"<<endl;
+            cout<<s[i]<<endl;
             return;
         }
     }
-    for (int i = 0; i < s.size(); i++)
-    {
-        for (int j = i + 1; j < s.size(); j++)
-        {
-            int l = (s[i] - '0') * 10 + (s[j] - '0');
-            if (l % 8 == 0)
-            {
-                cout << "YES\n"
-                     << l << "\n";
+
+    // 2 digitos
+
+    int x,y,z;
+
+    for(int i = 0; i < s.size(); i++){
+        for(int j = i+1; j < s.size(); j++){
+            x = s[i]-'0';
+            y = s[j]-'0';
+            int numPosible = 10*x + y;
+            if(numPosible%8==0){
+                cout<<"YES"<<endl;
+                cout<<numPosible<<endl;
                 return;
             }
         }
     }
-    FO(i, n)
+
+    // 3 digitos
+
+    for (int i = 0; i < s.size(); i++)
     {
-        FOR(j, i + 1, n, 1)
+        for (int j = i+1; j < s.size(); j++)
         {
-            FOR(k, j + 1, n, 1)
+            for (int k = j+1; k < s.size(); k++)
             {
-                x = s[i] - '0';
-                y = s[j] - '0';
-                z = s[k] - '0';
-                int possible_num = x * 100 + y * 10 + z;
-                if (possible_num % 8 == 0)
-                {
-                    cout << "YES" << endl;
-                    cout << possible_num << endl;
+                x=s[i]-'0';
+                y=s[j]-'0';
+                z=s[k]-'0';
+                int numPosible = 100*x + 10*y + z;
+                if(numPosible%8==0){
+                    cout<<"YES"<<endl;
+                    cout<<numPosible<<endl;
                     return;
                 }
             }
+            
         }
+    
     }
-    cout << "NO" << endl;
+
+    cout<<"NO"<<endl;
+    
 }
 
 void setIO()
