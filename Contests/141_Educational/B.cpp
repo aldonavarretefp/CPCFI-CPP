@@ -106,17 +106,35 @@ void solve(){
     FO(i,N*N)
         a[i] = i+1;
     debug(a);
-    VI mat(N*N);
     bool isMin = true;
-    int ptrmax=N*N-1,ptrmin=0;
-    FO(i,N*N){
-        if(isMin){
-            mat[i] = a[ptrmin++];
-            isMin = !isMin;
+    int ptrmax=N*N-1,ptrmin=0,c=0;
+    vector<vector<int>> ans(N,vector<int>(N));
+    debug(ans);
+    FO(i,N){
+        if(i%2){
+            RFOR(j,N-1,0,1){
+                if(c%2)
+                    ans[i][j] = a[ptrmax--];
+                else
+                    ans[i][j] = a[ptrmin++];
+                c--;
+            }
         }else{
-            mat[i] = a[ptrmax--];
-            isMin = !isMin;
+            debug(i);
+            FO(j,N){
+                if(c%2)
+                    ans[i][j] = a[ptrmax--];
+                else
+                    ans[i][j] = a[ptrmin++];
+                c++;
+            }
         }
+    }
+    FO(i,N){
+        FO(j,N){
+            cout<<ans[i][j]<<" ";
+        }
+        cout<<endl;
     }
 
 
