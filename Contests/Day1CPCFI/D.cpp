@@ -99,26 +99,14 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #else
 #define debug(x...)
 #endif
+
 void solve(){
-    int s;
+    string s;
     cin>>s;
-    VI ans;
-    
-    RFOR(i,9, 0, 1){
-        if(s<=0) break;
-        if(s-i>=0){
-            s-=i;
-            ans.PB(i);
-        }
-        debug(s);
-    }
-    debug(ans);
-    reverse(all(ans));
-    FO(i,ans.size()){
-        cout<<ans[i];
-    }
-    cout<<endl;
-    
+    debug(s);
+    int N = 5;
+    vector<int> arr ={4,3,2};
+    sort(arr.begin(),arr.end()); //arr = {2,3,4}
 }
 
 void setIO(){
@@ -132,7 +120,6 @@ void setIO(){
 
 /********** Main()  function **********/
 int32_t main(){
-    
     if(getenv("CP_IO")){setIO();}
     fastIO;
     int T; cin>>T;
