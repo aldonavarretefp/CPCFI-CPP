@@ -1,0 +1,9 @@
+The maximum element is 5
+The 1 th max element is 5
+The 2 th max element is 4
+The 3 th max element is 3
+The 4 th max element is 2
+The 5 th max element is 1
+ Is priority queue Q empty() ?
+check -->
+The priority queue is empty
