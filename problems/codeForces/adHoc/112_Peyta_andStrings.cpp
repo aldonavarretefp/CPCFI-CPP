@@ -115,17 +115,20 @@ void solve(){
         }
     }
 
-    
+    if(a==b){
+        cout<<0<<endl;
+        return;
+    }
+
     FO(i,n){
         if(b[i] > a[i]){
             cout<<-1<<endl;
             return;
-        }else if(a[i] > b[i]){
+        }else if(b[i] < a[i]){
             cout<<1<<endl;
             return;
         }
     }
-    cout<<0<<endl;
 }
 
 void setIO(){
