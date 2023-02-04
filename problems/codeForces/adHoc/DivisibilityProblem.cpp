@@ -103,14 +103,16 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 void solve(){
     int a,b;
     cin>>a>>b;
-    if (a%b==0){
+    if (a%b==0) {
         cout<<0<<endl;
         return;
     }
+    cout<<b - a%b<<endl;
+    return;
     int count = 0;
-    while (a%b!=0){
+    while (a%b!=0) {
         a++;
-        count++;
+        count++;    
     }
     cout<<count<<endl;
 }
