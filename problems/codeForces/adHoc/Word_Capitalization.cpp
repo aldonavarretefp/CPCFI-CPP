@@ -1,4 +1,4 @@
-// https://codeforces.com/problemset/problem/236/A
+https://codeforces.com/problemset/problem/281/A
 #include <iostream>
 #include <string>
 #include <vector>
@@ -102,23 +102,8 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #endif
 void solve(){
     string s; cin>>s;
-    VI a(26,0);
-
-    for (int i = 0; i < s.size(); i++){
-        a[s[i]-'a'] = 1;
-    }
-    int ans = 0;
-    FO(i,26){
-        ans+=a[i];
-    }
-    debug(a);
-
-    if(ans%2==1){
-        cout<<"IGNORE HIM!"<<endl;
-    }else{
-        cout<<"CHAT WITH HER!"<<endl;
-    }
-    
+    s[0]='a'<=s[0]<='z' ? toupper(s[0]) : s[0];
+    cout<<s<<endl;
 }
 
 void setIO(){
