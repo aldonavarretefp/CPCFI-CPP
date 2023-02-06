@@ -100,24 +100,37 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 void solve(){
-    int n; 
+    int64 n; 
     cin>>n;
     bool turn = true;
-    int alice, bob;
+    int64 alice, bob;
     alice = 0; bob = 0;
-    int cards = 1;
+    int64 cards = 1;
+    int64 bw=0, bb=0, aw=0, ab=0;
     while(n > 0){
+        debug(turn,cards);
         if(turn) { //alice
-            alice += min(n,cards);
+            alice = min(n,cards);
+            if(alice%2){ 
+                aw += alice/2+1;
+            }else{
+                aw += alice/2;
+            }
+                ab += alice/2;
         }else{
-            bob += min(n,cards);
+            bob = min(n,cards);
+            if(bob%2){
+                bb += bob/2 + 1;
+            }else{
+                bb += bob/2;
+            }
+            bw += bob/2;
         }
         n-=cards;
         cards+=4;
         turn = !turn;
-        debug(n);
     }
-    cout<<alice<<" "<<bob<<endl;
+    cout<<aw<<" "<<ab<<" "<<bw<<" "<<bb<<endl;
 }
 
 void setIO(){
