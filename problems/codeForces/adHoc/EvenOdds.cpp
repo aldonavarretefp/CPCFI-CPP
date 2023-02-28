@@ -101,16 +101,17 @@ void _print(T t, V... v) {__print(t); if (sizeof...(v)) cerr << ", "; _print(v..
 #define debug(x...)
 #endif
 void solve(){
-    int n, k;
+    int64 n, k;
     cin >>n >> k;
-    int isEven = 0;
-    if(n%2==0){
-        isEven = 1;
-    }else{
-        isEven = 0;
+    int64 mid = ceil(n/2.0);
+    if(k > mid){
+        k%=mid;
+        if(k==0) k = n/2;
+        cout<<2*k<<endl;
+    } else {
+        cout<<2*k - 1<<endl;
     }
-    
-    int start = 0;
+    return;
 }
 
 void setIO(){
